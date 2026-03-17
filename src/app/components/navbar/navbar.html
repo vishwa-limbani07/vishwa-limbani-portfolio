@@ -5,7 +5,7 @@
 
     <a *ngFor="let section of sections"
        (click)="scrollTo(section)"
-       class="nav-pill px-5 py-2 rounded-full text-sm cursor-pointer transition duration-300 hover:text-white hover:bg-white/10"
+        class="nav-pill px-5 py-2 rounded-full text-sm cursor-pointer transition duration-300 hover:text-white hover:bg-white/10"
        [ngClass]="{'active-pill': activeSection === section}">
 
       {{ section | titlecase }}
