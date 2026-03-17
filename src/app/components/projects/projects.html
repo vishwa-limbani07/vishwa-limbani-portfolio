@@ -1,0 +1,23 @@
+<section class="py-20">
+
+  <h2 class="text-3xl font-bold text-center mb-10">Projects</h2>
+
+  <div class="grid md:grid-cols-3 gap-8">
+
+    <div *ngFor="let project of projects; let i = index"
+         data-aos="fade-up"
+         [attr.data-aos-delay]="i * 150"
+         class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+
+      <img [src]="project.image" class="w-full h-48 object-cover" />
+
+      <div class="p-4">
+        <h3 class="font-bold text-lg">{{ project.name }}</h3>
+        <p class="text-gray-500 text-sm">{{ project.desc }}</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

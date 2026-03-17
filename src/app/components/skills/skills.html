@@ -1,0 +1,19 @@
+<section class="py-20 text-center">
+
+  <h2 class="text-3xl font-bold mb-10">Skills</h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    
+  @for (skill of skills; track $index) {
+  <div
+    data-aos="zoom-in"
+    [attr.data-aos-delay]="$index * 100"
+    class="p-6 bg-gray-100 rounded-xl hover:scale-105 transition"
+  >
+    {{ skill }}
+  </div>
+}
+
+  </div>
+
+</section>
