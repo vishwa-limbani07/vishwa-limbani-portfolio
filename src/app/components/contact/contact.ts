@@ -12,7 +12,7 @@ import AOS from 'aos';
 export class Contact implements OnInit {
   email = 'limbanivishwa@gmail.com';
   linkedinUrl = 'https://linkedin.com/in/vishwa-limbani';
-  resumeUrl = 'assets/docs/resume.pdf'; // Update with your actual resume path
+  resumeUrl = 'assets/docs/resume.pdf';
   currentYear = new Date().getFullYear();
 
   ngOnInit(): void {
