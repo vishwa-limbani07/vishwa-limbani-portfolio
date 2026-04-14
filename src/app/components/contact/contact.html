@@ -1,15 +1,138 @@
-<section class="py-20 text-center">
+<!-- Contact Section -->
+<section class="relative z-10 w-full px-5 py-20 sm:px-8 md:px-16 lg:pl-[clamp(48px,18vw,290px)] lg:pr-24">
 
-  <h2 data-aos="fade-up" class="text-3xl font-bold mb-4">Contact Me</h2>
+  <!-- Section Header -->
+  <div class="mb-16">
+    <div class="flex items-center gap-4 mb-6" data-aos="fade-right">
+      <div class="h-[1px] w-12 bg-[#c4c0b9]"></div>
+      <span class="section-label">Connect</span>
+    </div>
+    <h2 class="section-heading" data-aos="fade-up" data-aos-delay="100">
+      Get in <span class="text-[#d1cec8]">Touch</span>
+    </h2>
+  </div>
 
-  <p data-aos="fade-up" data-aos-delay="200" class="text-gray-500 mb-6">
-    Let's work together 🚀
-  </p>
+  <!-- Bento Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
 
-  <a data-aos="fade-up" data-aos-delay="400"
-     href="mailto:your@email.com"
-     class="px-6 py-3 bg-black text-white rounded-full">
-    Email Me
-  </a>
+    <!-- Hero Card -->
+    <div
+      class="md:col-span-2 bg-[#141414] text-white p-12 rounded-[3rem] flex flex-col justify-between"
+      data-aos="fade-up"
+      data-aos-delay="150"
+    >
+      <h3 class="bento-title text-white">
+        Start a <br /> Conversation
+      </h3>
+      <div class="flex flex-wrap gap-4">
+        <div class="bento-badge">Available for Hire</div>
+        <div class="bento-badge">Remote Friendly</div>
+      </div>
+    </div>
 
+    <!-- Email Card -->
+    <a
+      [href]="'mailto:' + email"
+      class="bento-card group"
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      <svg class="bento-icon group-hover:text-[#141414]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="20" height="16" x="2" y="4" rx="2" />
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+      </svg>
+      <div class="bento-card-text">{{ email }}</div>
+    </a>
+
+    <!-- LinkedIn Card -->
+    <a
+      [href]="linkedinUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="bento-card-bordered group"
+      data-aos="fade-up"
+      data-aos-delay="250"
+    >
+      <svg class="bento-icon group-hover:text-[#141414]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+        <rect width="4" height="12" x="2" y="9" />
+        <circle cx="4" cy="4" r="2" />
+      </svg>
+      <div class="bento-card-text">LinkedIn Profile</div>
+    </a>
+
+    <!-- Download CV Card -->
+    <a
+      [href]="resumeUrl"
+      download
+      class="md:col-span-2 bg-white border border-gray-100 p-12 rounded-[3rem] flex items-center justify-between group cursor-pointer"
+      data-aos="fade-up"
+      data-aos-delay="300"
+    >
+      <div>
+        <h3 class="bento-subtitle">Download CV</h3>
+        <p class="text-xs text-gray-400">Latest Resume {{ currentYear }} (PDF)</p>
+      </div>
+      <div class="cv-arrow group-hover:bg-[#141414] group-hover:text-white transition-all">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="-rotate-45">
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </div>
+    </a>
+
+  </div>
 </section>
+
+<!-- Footer -->
+<footer class="py-20 px-5 sm:px-8 md:px-16 lg:pl-[clamp(48px,18vw,290px)] lg:pr-24 border-t border-gray-100">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Top Row -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12 mb-20">
+      <div>
+        <div class="footer-logo">VL</div>
+        <p class="text-gray-400 text-sm mt-4 max-w-xs">
+          Building digital experiences that combine logic with aesthetics.
+        </p>
+      </div>
+      <div class="flex gap-12">
+        <div class="space-y-4">
+          <div class="footer-col-label">Navigation</div>
+          <ul class="space-y-2">
+            <li class="footer-link">Home</li>
+            <li class="footer-link">About</li>
+            <li class="footer-link">Skills</li>
+            <li class="footer-link">Work</li>
+          </ul>
+        </div>
+        <div class="space-y-4">
+          <div class="footer-col-label">Social</div>
+          <ul class="space-y-2">
+            <li>
+              <a [href]="linkedinUrl" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+            </li>
+            <li>
+              <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+            </li>
+            <li>
+              <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" class="footer-link">Twitter</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-gray-50 gap-6">
+      <div class="footer-copyright">
+        &copy; {{ currentYear }} Vishwa Limbani. All Rights Reserved.
+      </div>
+      <div class="flex items-center gap-8">
+        <span class="footer-legal">Privacy Policy</span>
+        <span class="footer-legal">Terms of Service</span>
+      </div>
+    </div>
+
+  </div>
+</footer>

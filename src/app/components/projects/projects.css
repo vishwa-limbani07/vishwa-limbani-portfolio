@@ -1,0 +1,91 @@
+:host {
+  display: block;
+}
+
+/* ---- Section Header ---- */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #9e9891;
+}
+
+.section-heading {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(48px, 5.5vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #1a1a1a;
+}
+
+/* ---- Project Row ---- */
+.project-row {
+  cursor: default;
+}
+
+.project-index {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: #d1cec8;
+  margin-bottom: 16px;
+}
+
+.project-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(32px, 4.5vw, 64px);
+  font-weight: 400;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ---- Tech Tags ---- */
+.tech-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  background: #f9fafb;
+  border-radius: 100px;
+  color: #6b6560;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ---- Hover Image Reveal ---- */
+.project-image-reveal {
+  position: absolute;
+  right: 20%;
+  top: 50%;
+  transform: translateY(-50%) rotate(6deg);
+  width: 400px;
+  height: 250px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.project-row:hover .project-image-reveal {
+  opacity: 1;
+  transform: translateY(-50%) translateX(12px) rotate(6deg);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .project-image-reveal {
+    display: none;
+  }
+
+  .project-title {
+    font-size: clamp(28px, 6vw, 40px);
+  }
+}

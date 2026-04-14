@@ -8,19 +8,27 @@ import { Component, HostListener } from '@angular/core';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-    scrollTo(section: string) {
-    document.getElementById(section)?.scrollIntoView({
-      behavior: 'smooth'
-    });
-  }
   activeSection: string = 'home';
   isMenuOpen = false;
 
-  sections = ['home', 'about', 'skills', 'projects', 'contact'];
+  sections = ['about', 'skills', 'projects', 'connect'];
 
-
-  @HostListener('window:scroll', [])
+  scrollTo(section: string) {
+    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+    this.isMenuOpen = false;
+  }
+  isScrolled = false;
+  lastScrollY = 0;
+   @HostListener('window:scroll', [])
   onScroll() {
+    const currentScrollY = window.scrollY;
+ 
+    // Trigger glass effect once scrolled past 60px
+    this.isScrolled = currentScrollY > 60;
+ console.log('ScrollY:', currentScrollY, 'Scrolled:', this.isScrolled);
+    this.lastScrollY = currentScrollY;
+ 
+    // Active section tracking
     this.sections.forEach(section => {
       const el = document.getElementById(section);
       if (el) {

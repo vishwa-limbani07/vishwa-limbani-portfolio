@@ -5,17 +5,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@font-face {
-  font-family: 'Unbounded';
-  src: url('assets/fonts/Unbounded-Regular.ttf') format('truetype');
-  font-weight: 400;
-}
 
-@font-face {
-  font-family: 'Unbounded';
-  src: url('assets/fonts/Unbounded-Bold.ttf') format('truetype');
-  font-weight: 700;
-}
 /* Theme Variables */
 .nav-link {
   @apply text-[#8892B0] cursor-pointer transition duration-300;
@@ -31,8 +21,8 @@ section {
   scroll-margin-top: 80px;
 }
 body {
-  background-color: #020E1A;
-  color: #E6F1FF;
-    font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #333333;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
 
 }

@@ -1,23 +1,53 @@
-<section class="py-20">
+<section class="relative z-10 w-full px-5 py-20 sm:px-8 md:px-16 lg:pl-[clamp(48px,18vw,290px)] lg:pr-24">
 
-  <h2 class="text-3xl font-bold text-center mb-10">Projects</h2>
+  <!-- Section Header -->
+  <div class="mb-16">
+    <div class="flex items-center gap-4 mb-6" data-aos="fade-right">
+      <div class="h-[1px] w-12 bg-[#c4c0b9]"></div>
+      <span class="section-label">Work</span>
+    </div>
+    <h2 class="section-heading" data-aos="fade-up" data-aos-delay="100">
+      Selected <span class="text-[#d1cec8]">Projects</span>
+    </h2>
+  </div>
 
-  <div class="grid md:grid-cols-3 gap-8">
-
-    <div *ngFor="let project of projects; let i = index"
-         data-aos="fade-up"
-         [attr.data-aos-delay]="i * 150"
-         class="rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
-
-      <img [src]="project.image" class="w-full h-48 object-cover" />
-
-      <div class="p-4">
-        <h3 class="font-bold text-lg">{{ project.name }}</h3>
-        <p class="text-gray-500 text-sm">{{ project.desc }}</p>
+  <!-- Project List -->
+  <div class="flex flex-col">
+    <div
+      *ngFor="let project of projects; let i = index"
+      class="project-row group border-b border-gray-100 py-12 flex flex-col md:flex-row md:items-center justify-between relative"
+      data-aos="fade-right"
+      [attr.data-aos-delay]="i * 100"
+    >
+      <!-- Left: Index + Title -->
+      <div class="relative z-10">
+        <span class="project-index">{{ getIndex(i) }}</span>
+        <h3 class="project-title group-hover:translate-x-8 transition-transform duration-500">
+          {{ project.title }}
+        </h3>
       </div>
 
-    </div>
+      <!-- Right: Tech Tags -->
+      <div class="flex flex-wrap gap-3 mt-8 md:mt-0 relative z-10">
+        <span
+          *ngFor="let tech of project.tech"
+          class="tech-tag group-hover:bg-[#141414] group-hover:text-white transition-colors"
+        >
+          {{ tech }}
+        </span>
+      </div>
 
+      <!-- Hover Image Reveal -->
+      <div class="project-image-reveal">
+        <img
+          [src]="project.image"
+          [alt]="project.title"
+          class="w-full h-full object-cover"
+          referrerpolicy="no-referrer"
+          loading="lazy"
+        />
+      </div>
+    </div>
   </div>
 
 </section>

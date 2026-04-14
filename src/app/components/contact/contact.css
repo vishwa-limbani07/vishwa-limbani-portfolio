@@ -1,0 +1,187 @@
+:host {
+  display: block;
+}
+
+/* ---- Section Header ---- */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #9e9891;
+}
+
+.section-heading {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(48px, 5.5vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #1a1a1a;
+}
+
+/* ---- Bento Grid ---- */
+.bento-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.bento-badge {
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.bento-card {
+  background: #f9fafb;
+  padding: 40px;
+  border-radius: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.3s ease;
+}
+
+.bento-card:hover {
+  background: #f3f4f6;
+}
+
+.bento-card-bordered {
+  background: #ffffff;
+  border: 1px solid #f3f4f6;
+  padding: 40px;
+  border-radius: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.bento-card-bordered:hover {
+  border-color: #e5e7eb;
+}
+
+.bento-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 16px;
+  color: #d1d5db;
+  transition: color 0.3s ease;
+}
+
+.bento-card-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.bento-subtitle {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.cv-arrow {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a1a1a;
+  flex-shrink: 0;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ---- Footer ---- */
+.footer-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: #1a1a1a;
+}
+
+.footer-col-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #d1cec8;
+}
+
+.footer-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  display: block;
+}
+
+.footer-link:hover {
+  color: #9e9891;
+}
+
+.footer-copyright {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #d1cec8;
+}
+
+.footer-legal {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #d1cec8;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footer-legal:hover {
+  color: #1a1a1a;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .bento-title {
+    font-size: 28px;
+  }
+
+  .bento-badge {
+    padding: 8px 16px;
+    font-size: 9px;
+  }
+}

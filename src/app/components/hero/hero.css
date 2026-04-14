@@ -1,46 +1,243 @@
-:host { display: block; }
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-    }
-    .container { max-width: 800px; padding: 2rem; width: 100%; }
-    .theme-toggle { position: absolute; top: 2rem; right: 2rem; }
-    h1 { 
-      font-size: clamp(2.5rem, 5vw, 4rem); 
-      margin: 0 0 1rem; 
-      background: linear-gradient(135deg, var(--text), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .subtitle { 
-      font-size: 1.5rem; 
-      margin: 0 0 0.5rem; 
-      opacity: 0.9; 
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .location { 
-      font-size: 1.1rem; 
-      margin: 0 0 2rem; 
-      opacity: 0.7; 
-    }
-    .cta { 
-      display: flex; 
-      gap: 1rem; 
-      justify-content: center; 
-      flex-wrap: wrap; 
-    }
-    .btn-primary, .btn-secondary {
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      font-size: 1.1rem;
-    }
+/* ─── Import Fonts ─────────────────────────────────── */
+/* @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&family=Space+Mono&display=swap'); */
+
+/* ─── Hero Wrapper ──────────────────────────────────── */
+.hero-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ─── Grid Background ───────────────────────────────── */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+/* ─── Hero Content ──────────────────────────────────── */
+/* 
+  KEY FIX: The reference design has the content starting at roughly 
+  the same x-position as the logo (~280-300px from left at full width).
+  We use padding-left matching the navbar logo position.
+*/
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-left: clamp(48px, 18vw, 290px);
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Availability Badge ────────────────────────────── */
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  width: fit-content;
+  margin-bottom: 28px;
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.2); }
+  50%      { box-shadow: 0 0 0 6px rgba(34,197,94,0.07); }
+}
+
+.badge-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: #374151;
+  text-transform: uppercase;
+}
+
+/* ─── Name Block ────────────────────────────────────── */
+.name-block {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.88;
+  margin-bottom: 24px;
+}
+
+.name-first {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(88px, 11vw, 150px);
+  color: #0a0a0a;
+  margin: 0;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  animation: slideInLeft 0.75s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+.name-last {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(88px, 11vw, 150px);
+  color: #c2c2c2;
+  margin: 0;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  animation: slideInLeft 0.75s 0.08s cubic-bezier(0.16,1,0.3,1) both;
+  transition: color 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+}
+.name-last:hover {
+  color: #000;
+}
+
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ─── Bottom Row ────────────────────────────────────── */
+.hero-bottom-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+  margin-bottom: 36px;
+  animation: fadeUp 0.85s 0.2s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.role-line {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+
+.role-dash {
+  display: block;
+  width: 36px;
+  height: 2px;
+  background: #000;
+  flex-shrink: 0;
+}
+
+.role-text {
+
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: #0a0a0a;
+  text-transform: uppercase;
+}
+
+.role-amp {
+  font-weight: 400;
+  color: #6b7280;
+  margin: 0 6px;
+}
+
+.hero-description {
+
+  font-size: 14px;
+  line-height: 1.75;
+  color: #6b7280;
+  max-width: 290px;
+  margin: 0;
+}
+
+/* ─── CTA Buttons ───────────────────────────────────── */
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  animation: fadeUp 0.85s 0.32s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 30px;
+  background: #0a0a0a;
+  color: #ffffff;
+  border-radius: 999px;
+
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+  border: none;
+}
+
+.btn-primary:hover { background: #222; transform: translateX(2px); }
+
+.btn-arrow {
+  font-size: 15px;
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:hover .btn-arrow { transform: translateX(4px); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: transparent;
+  color: #0a0a0a;
+  border: 1.5px solid #0a0a0a;
+  border-radius: 999px;
+
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.btn-outline:hover { background: #0a0a0a; color: #ffffff; }
+
+.btn-dl { font-size: 15px; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Responsive ────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .hero-content { padding-left: clamp(32px, 8vw, 80px); padding-right: 60px; }
+}
+
+@media (max-width: 768px) {
+  .hero-content { padding-left: 24px; padding-right: 24px; }
+  .hero-bottom-row { flex-direction: column; gap: 16px; }
+  .social-rail { display: none; }
+  .hero-ctas { flex-direction: column; align-items: flex-start; }
+}

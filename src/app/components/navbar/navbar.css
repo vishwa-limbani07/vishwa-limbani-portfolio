@@ -1,20 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono&display=swap');
 
-@reference "tailwindcss";
-.nav-pill {
-  font-family: "Unbounded", sans-serif;
-  font-weight: 500;
+/* ─── Navbar ────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Same horizontal padding as hero-content so logo & name align */
+  padding: 20px clamp(48px, 18vw, 290px) 20px clamp(48px, 18vw, 290px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+/* On scroll — frosted glass */
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.04);
+  padding-top: 14px;    /* slightly shrinks on scroll */
+  padding-bottom: 14px;
+}
+/* ─── Logo ──────────────────────────────────────────── */
+.navbar-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  cursor: default;
+  user-select: none;
+}
+
+.logo-first {
+
+  font-weight: 700;
+  font-size: 15px;
   letter-spacing: 0.5px;
+  color: #000000;
+}
+
+.logo-last {
+
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.logo-subtitle {
+  font-family: 'Space Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 3px;
+  color: #9ca3af;
+  margin-top: 3px;
+}
+
+/* ─── Nav Links ─────────────────────────────────────── */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: #6b7280;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.25s;
   text-transform: uppercase;
-  font-size: 13px;
-}
-/* Hover */
-.nav-pill:hover {
-       @apply text-white bg-white/10;
-
 }
 
-/* Active Pill */
-.active-pill {
-   @apply text-white bg-white/10;
-
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: #000000;
+  transition: width 0.25s ease;
 }
+
+.nav-link:hover { color: #000000; }
+.nav-link:hover::after,
+.nav-link.active::after { width: 100%; }
+.nav-link.active { color: #000000; }
+
+/* ─── Hamburger ─────────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #000;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* ─── Mobile Menu ───────────────────────────────────── */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  flex-direction: column;
+  padding: 24px 32px;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.mobile-link {
+
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #374151;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.mobile-link:hover { color: #000; }
+
+/* ─── Responsive ────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .navbar {
+    padding-left: clamp(32px, 8vw, 80px);
+    padding-right: clamp(32px, 8vw, 80px);
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar { padding: 16px 24px; }
+  .navbar-links { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu { display: flex; }
+}
+

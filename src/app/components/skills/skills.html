@@ -1,19 +1,38 @@
-<section class="py-20 text-center">
+<section class="relative z-10 w-full px-5 py-20 sm:px-8 md:px-16 lg:pl-[clamp(48px,18vw,290px)] lg:pr-24 overflow-hidden">
 
-  <h2 class="text-3xl font-bold mb-10">Skills</h2>
-
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-    
-  @for (skill of skills; track $index) {
-  <div
-    data-aos="zoom-in"
-    [attr.data-aos-delay]="$index * 100"
-    class="p-6 bg-gray-100 rounded-xl hover:scale-105 transition"
-  >
-    {{ skill }}
+  <!-- Section Header -->
+  <div class="mb-16">
+    <div class="flex items-center gap-4 mb-6" data-aos="fade-right">
+      <div class="h-[1px] w-12 bg-[#c4c0b9]"></div>
+      <span class="section-label">Expertise</span>
+    </div>
+    <h2 class="section-heading" data-aos="fade-up" data-aos-delay="100">
+      Technical <span class="text-[#d1cec8]">Stack</span>
+    </h2>
   </div>
-}
 
+  <!-- Marquee Row 1 (left to right) -->
+  <div class="marquee-wrapper mb-6" data-aos="fade-up" data-aos-delay="200">
+    <div class="marquee-track animate-marquee">
+      <div
+        *ngFor="let skill of doubledSkills"
+        class="marquee-pill"
+      >
+        <span class="pill-text">{{ skill.name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee Row 2 (right to left) -->
+  <div class="marquee-wrapper" data-aos="fade-up" data-aos-delay="300">
+    <div class="marquee-track animate-marquee-reverse">
+      <div
+        *ngFor="let skill of doubledSkillsReversed"
+        class="marquee-pill marquee-pill--inverted"
+      >
+        <span class="pill-text">{{ skill.name }}</span>
+      </div>
+    </div>
   </div>
 
 </section>

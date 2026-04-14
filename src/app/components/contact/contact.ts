@@ -1,9 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-contact',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './contact.html',
-  styleUrl: './contact.css',
+  styleUrls: ['./contact.css']
 })
-export class Contact {}
+export class Contact implements OnInit {
+  email = 'limbanivishwa@gmail.com';
+  linkedinUrl = 'https://linkedin.com/in/vishwa-limbani';
+  resumeUrl = 'assets/docs/resume.pdf'; // Update with your actual resume path
+  currentYear = new Date().getFullYear();
+
+  ngOnInit(): void {
+    AOS.refresh();
+  }
+}

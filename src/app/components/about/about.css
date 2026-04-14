@@ -1,0 +1,160 @@
+/* ===========================
+   Import Fonts (add to styles.scss or index.html if not already)
+   
+   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+   =========================== */
+
+:host {
+  display: block;
+}
+
+/* ---- Profile Image ---- */
+.profile-img-container {
+  width: clamp(280px, 35vw, 480px);
+  aspect-ratio: 4 / 5;
+}
+
+/* ---- Rotating Circle Badge ---- */
+.rotating-badge {
+  animation: spin 20s linear infinite;
+}
+
+.circle-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 4.5px;
+  fill: #b0aba4;
+  text-transform: uppercase;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Typography ---- */
+.bio-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #c2c2c2;
+}
+
+.bio-heading {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(48px, 5.5vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #1a1a1a;
+}
+
+.bio-tagline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #1a1a1a;
+}
+
+.bio-description {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #7a756e;
+}
+
+.info-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c4c0b9;
+  margin-bottom: 6px;
+}
+
+.info-value {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* ---- Status Dot ---- */
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(34, 197, 94, 0.3);
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+/* ---- Skill Chips ---- */
+.skill-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  padding: 8px 16px;
+  border: 1px solid #e8e4de;
+  border-radius: 6px;
+  color: #c2c2c2;
+  background: rgba(245, 243, 239, 0.5);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.skill-chip:hover {
+  border-color: #c4612a;
+  color: #c4612a;
+  background: rgba(196, 97, 42, 0.04);
+  transform: translateY(-1px);
+}
+.profile-img-wrapper {
+  margin-right: 40px;
+  margin-left: 50px;
+}
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .profile-img-container {
+    width: clamp(240px, 60vw, 360px);
+  }
+}
+
+@media (max-width: 640px) {
+  .profile-img-container {
+    width: 100%;
+    max-width: 320px;
+  }
+}

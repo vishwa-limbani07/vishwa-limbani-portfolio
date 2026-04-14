@@ -1,17 +1,16 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { About } from '../../components/about/about';
 import { Contact } from '../../components/contact/contact';
-import { Footer } from '../../components/footer/footer';
-import { Hero } from '../../components/hero/hero';
 import { Navbar } from '../../components/navbar/navbar';
 import { Projects } from '../../components/projects/projects';
 import { Skills } from '../../components/skills/skills';
 import * as AOS from 'aos';
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { HeroComponent } from '../../components/hero/hero';
 @Component({
   selector: 'app-home',
-  imports: [Navbar, Hero, About, Skills, Projects, Contact, Footer],
+  imports: [Navbar, HeroComponent, About, Skills, Projects, Contact],
   templateUrl: './home.html',
   styleUrl: './home.css',
   standalone: true,
