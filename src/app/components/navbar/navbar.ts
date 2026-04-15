@@ -25,7 +25,6 @@ export class Navbar {
  
     // Trigger glass effect once scrolled past 60px
     this.isScrolled = currentScrollY > 60;
- console.log('ScrollY:', currentScrollY, 'Scrolled:', this.isScrolled);
     this.lastScrollY = currentScrollY;
  
     // Active section tracking
