@@ -1,61 +1,88 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  Inject,
+  PLATFORM_ID
+} from '@angular/core';
+
+import { isPlatformBrowser } from '@angular/common';
+
 import { About } from '../../components/about/about';
 import { Contact } from '../../components/contact/contact';
 import { Navbar } from '../../components/navbar/navbar';
 import { Projects } from '../../components/projects/projects';
 import { Skills } from '../../components/skills/skills';
-import * as AOS from 'aos';
-import { isPlatformBrowser } from '@angular/common';
-import { Inject, PLATFORM_ID } from '@angular/core';
 import { HeroComponent } from '../../components/hero/hero';
+
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [Navbar, HeroComponent, About, Skills, Projects, Contact],
   templateUrl: './home.html',
-  styleUrl: './home.css',
-  standalone: true,
+  styleUrl: './home.css'
 })
 export class Home implements OnInit, AfterViewInit {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
   private isDark = true;
   private readonly THEME_KEY = 'portfolio-theme';
+  private isBrowser: boolean;
 
- ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
+  async ngOnInit(): Promise<void> {
+    if (this.isBrowser) {
+      this.initTheme();
+
+      // ✅ Dynamic import (SSR safe)
+      const AOS = (await import('aos')).default;
+
       AOS.init({
-        duration: 1000,
-        once: true
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        offset: 100
       });
     }
   }
-  
-  init() {
-    const saved = localStorage.getItem(this.THEME_KEY);
-    this.isDark = saved ? JSON.parse(saved) : true;
-    document.documentElement.setAttribute('data-theme', this.isDark ? 'dark' : 'light');
-  }
 
-ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-     AOS.init({
-  duration: 800,
-  easing: 'ease-in-out',
-  once: true,
-  offset: 100
-});
+  async ngAfterViewInit(): Promise<void> {
+    if (this.isBrowser) {
+      const AOS = (await import('aos')).default;
 
       setTimeout(() => {
         AOS.refresh();
       }, 100);
     }
   }
-    toggle() {
+
+  // ✅ Theme initialization
+  private initTheme(): void {
+    const saved = localStorage.getItem(this.THEME_KEY);
+    this.isDark = saved ? JSON.parse(saved) : true;
+
+    document.documentElement.setAttribute(
+      'data-theme',
+      this.isDark ? 'dark' : 'light'
+    );
+  }
+
+  // ✅ Toggle theme
+  toggle(): void {
     this.isDark = !this.isDark;
+
     localStorage.setItem(this.THEME_KEY, JSON.stringify(this.isDark));
-    document.documentElement.setAttribute('data-theme', this.isDark ? 'dark' : 'light');
+
+    document.documentElement.setAttribute(
+      'data-theme',
+      this.isDark ? 'dark' : 'light'
+    );
   }
 
   get isDarkMode(): boolean {
     return this.isDark;
   }
 }
+

@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import AOS from 'aos';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  Inject,
+  PLATFORM_ID
+} from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 interface Skill {
   name: string;
@@ -15,7 +20,14 @@ interface Skill {
   templateUrl: './skills.html',
   styleUrls: ['./skills.css']
 })
-export class Skills implements OnInit {
+export class Skills implements OnInit, AfterViewInit {
+
+  private isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
   skills: Skill[] = [
     { name: 'Angular', category: 'Frontend', level: 95 },
     { name: 'Node.js', category: 'Backend', level: 85 },
@@ -30,7 +42,7 @@ export class Skills implements OnInit {
     { name: 'Express.js', category: 'Backend', level: 85 },
     { name: 'React', category: 'Frontend', level: 75 },
     { name: 'Tailwind CSS', category: 'Frontend', level: 95 },
-    { name: 'MongoDB', category: 'Database', level: 80 },
+    { name: 'MongoDB', category: 'Database', level: 80 }
   ];
 
   // Duplicate for seamless loop
@@ -42,7 +54,26 @@ export class Skills implements OnInit {
     return [...this.skills, ...this.skills].reverse();
   }
 
-  ngOnInit(): void {
-    AOS.refresh();
+  async ngOnInit(): Promise<void> {
+    if (this.isBrowser) {
+      const AOS = (await import('aos')).default;
+
+      AOS.init({
+        duration: 800,
+        once: true,
+        easing: 'ease-in-out'
+      });
+    }
+  }
+
+  async ngAfterViewInit(): Promise<void> {
+    if (this.isBrowser) {
+      const AOS = (await import('aos')).default;
+
+      setTimeout(() => {
+        AOS.refresh();
+      }, 100);
+    }
   }
 }
+

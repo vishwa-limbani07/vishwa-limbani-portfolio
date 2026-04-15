@@ -2,18 +2,25 @@
   class="relative z-10 w-full flex flex-col lg:flex-row items-center px-5 pt-24 pb-12 sm:px-8 sm:pt-20 md:px-16 md:pr-16 md:pt-16 lg:pl-[clamp(48px,18vw,290px)] lg:pr-24 lg:pt-0 lg:pb-0 gap-10 lg:gap-12"
 >
   <!-- Image Section -->
-  <div class="relative flex-shrink-0 profile-img-wrapper" data-aos="zoom-in">
+  <div
+    class="relative flex-shrink-0 profile-img-wrapper"
+    data-aos="zoom-in"
+  >
     <div class="profile-img-container rounded-2xl overflow-hidden shadow-lg">
       <img
         [src]="profileImage"
         alt="Profile"
         class="w-full h-full object-cover grayscale-0 hover:grayscale transition-all duration-700"
-        referrerpolicy="no-referrer"
+        referrerPolicy="no-referrer"
       />
     </div>
 
-    <!-- Rotating Circle Badge -->
-    <div class="absolute -bottom-8 -right-8 w-28 h-28 rounded-full bg-white border border-[#e5e5e5] flex items-center justify-center z-10 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+    <!-- Badge -->
+    <div
+      class="absolute -bottom-8 -right-8 w-28 h-28 rounded-full bg-white border border-[#e5e5e5] flex items-center justify-center z-10 shadow-sm"
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
       <svg class="rotating-badge w-24 h-24" viewBox="0 0 100 100">
         <defs>
           <path
@@ -23,7 +30,7 @@
         </defs>
         <text class="circle-text">
           <textPath href="#circlePath">
-            ANGULAR &#8226; DESIGN &#8226; CODE &#8226;&#160;
+            ANGULAR • DESIGN • CODE •
           </textPath>
         </text>
       </svg>
@@ -31,39 +38,53 @@
     </div>
   </div>
 
-  <!-- Content Section -->
+  <!-- Content -->
   <div class="flex-1 max-w-2xl">
+    <!-- Label -->
     <div class="flex items-center gap-4 mb-6" data-aos="fade-right">
       <div class="h-[1px] w-12 bg-[#c4c0b9]"></div>
       <span class="bio-label">Profile</span>
     </div>
 
+    <!-- Heading -->
     <h2 class="bio-heading mb-8" data-aos="fade-up" data-aos-delay="100">
       Behind <span class="text-[#d1cec8]">the Code</span>
     </h2>
 
+    <!-- Text -->
     <div class="space-y-5 mb-12" data-aos="fade-up" data-aos-delay="200">
       <p class="bio-tagline">
-        Engineering <span class="text-[#c4612a]">high-performance Angular applications</span> 
+        Engineering
+        <span class="text-[#c4612a]">
+          high-performance Angular applications
+        </span>
         with type-safe architectures and reactive data flows.
       </p>
+
       <p class="bio-description">
-        3+ years specializing in Angular, RxJS, and NgRx — building modular, 
-        scalable frontends that handle real-world complexity. From component 
-        libraries to enterprise dashboards, I write code that ships clean 
+        3+ years specializing in Angular, RxJS, and NgRx — building modular,
+        scalable frontends that handle real-world complexity. From component
+        libraries to enterprise dashboards, I write code that ships clean
         and runs fast.
       </p>
     </div>
 
-    <div class="grid grid-cols-3 gap-8 mb-10 pb-10 border-b border-[#e8e4de]" data-aos="fade-up" data-aos-delay="300">
+    <!-- Info -->
+    <div
+      class="grid grid-cols-3 gap-8 mb-10 pb-10 border-b border-[#e8e4de]"
+      data-aos="fade-up"
+      data-aos-delay="300"
+    >
       <div>
         <div class="info-label">Location</div>
         <div class="info-value">Navi Mumbai, India</div>
       </div>
+
       <div>
         <div class="info-label">Experience</div>
         <div class="info-value">3+ Years</div>
       </div>
+
       <div>
         <div class="info-label">Status</div>
         <div class="info-value flex items-center gap-2">
@@ -73,8 +94,16 @@
       </div>
     </div>
 
-    <div class="flex flex-wrap gap-2" data-aos="fade-up" data-aos-delay="400">
-      <span *ngFor="let skill of skills" class="skill-chip">
+    <!-- Skills -->
+    <div
+      class="flex flex-wrap gap-2"
+      data-aos="fade-up"
+      data-aos-delay="400"
+    >
+      <span
+        *ngFor="let skill of skills"
+        class="skill-chip hover:scale-105 transition-transform duration-300"
+      >
         {{ skill }}
       </span>
     </div>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import AOS from 'aos';
 
 @Component({
   selector: 'app-about',
@@ -9,16 +9,20 @@ import AOS from 'aos';
   templateUrl: './about.html',
   styleUrls: ['./about.css']
 })
-export class About implements OnInit {
+export class About {
+
   profileImage = 'assets/images/profile.png';
 
-  skills: string[] = ['ANGULAR', 'RXJS', 'NGRX', 'TYPESCRIPT', 'TAILWIND', 'NODEJS', 'EXPRESS', 'MONGODB', '+5 MORE'];
-
-  ngOnInit(): void {
-    AOS.init({
-      duration: 700,
-      easing: 'ease-out-cubic',
-      once: true
-    });
-  }
+  skills: string[] = [
+    'ANGULAR',
+    'RXJS',
+    'NGRX',
+    'TYPESCRIPT',
+    'TAILWIND',
+    'NODEJS',
+    'EXPRESS',
+    'MONGODB',
+    '+5 MORE'
+  ];
 }
+
