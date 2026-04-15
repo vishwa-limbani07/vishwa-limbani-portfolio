@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: space-between;
   /* Same horizontal padding as hero-content so logo & name align */
-  padding: 20px clamp(48px, 18vw, 290px) 20px clamp(48px, 18vw, 290px);
+  padding: 20px var(--spacing-x) 20px var(--spacing-x);
   border-bottom: 1px solid transparent;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -38,7 +38,7 @@
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 0.5px;
-  color: #000000;
+  color: var(--text-dark);
 }
 
 .logo-last {
@@ -49,10 +49,10 @@
 }
 
 .logo-subtitle {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-family-space);
   font-size: 7.5px;
   letter-spacing: 3px;
-  color: #9ca3af;
+  color: var(--text-gray-light);
   margin-top: 3px;
 }
 
@@ -64,6 +64,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
 
 .nav-link {
@@ -71,7 +72,7 @@
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 1.5px;
-  color: #6b7280;
+  color: var(--text-gray);
   cursor: pointer;
   text-decoration: none;
   position: relative;
@@ -86,14 +87,14 @@
   left: 0;
   width: 0;
   height: 1.5px;
-  background: #000000;
+  background: var(--text-dark);
   transition: width 0.25s ease;
 }
 
-.nav-link:hover { color: #000000; }
+.nav-link:hover { color: var(--text-dark); }
 .nav-link:hover::after,
 .nav-link.active::after { width: 100%; }
-.nav-link.active { color: #000000; }
+.nav-link.active { color: var(--text-dark); }
 
 /* ─── Hamburger ─────────────────────────────────────── */
 .hamburger {

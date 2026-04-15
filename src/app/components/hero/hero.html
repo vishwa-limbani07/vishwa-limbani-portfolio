@@ -1,25 +1,28 @@
-<div class="hero-wrapper relative flex items-center w-full min-h-screen bg-white overflow-hidden">
+<div class="hero-wrapper relative flex items-center w-full bg-white overflow-hidden">
 
   <!-- Grid background lines -->
   <!-- <div class="grid-bg absolute inset-0 pointer-events-none z-0" aria-hidden="true"></div> -->
 <div class="grid-bg absolute inset-0 pointer-events-none z-0" aria-hidden="true">
   <!-- Decorative chevron -->
-  <svg 
-    class="absolute" 
-    style="left: 60%; top: 8%; width: clamp(280px, 35vw, 300px); opacity: 0.05;" 
-    viewBox="0 0 300 400" 
-    fill="none" 
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M40 20 L240 200 L40 380" stroke="#000" stroke-width="72" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
+ <svg 
+  class="absolute" 
+  style="left: 60%; top: 8%; opacity: 0.05;" 
+  viewBox="0 0 800 840" 
+  fill="none" 
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path d="M60 60 L280 270 L60 480" stroke="#000" stroke-width="72" 
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="240" y1="480" x2="460" y2="480" stroke="#000" stroke-width="72" 
+        stroke-linecap="round"/>
+</svg>
 </div>
   <!-- Main content -->
   <div class="relative z-10 w-full flex flex-row items-center justify-between
-              px-5 pt-24 pb-12
-              sm:px-8 sm:pt-20
-              md:px-16 md:pr-16 md:pt-16
-              lg:pl-[clamp(48px,18vw,290px)] lg:pr-24 lg:pt-0 lg:pb-0">
+              px-5 py-12
+              sm:px-8
+              md:px-16 md:pr-16
+              lg:pl-[clamp(48px,18vw,290px)] lg:pr-24">
 <div>
     <!-- Available badge -->
     <div
@@ -52,9 +55,7 @@
       </div>
 
       <p class="text-[13px] leading-relaxed text-gray-500 m-0 max-w-full md:text-sm md:max-w-[290px]">
-        Crafting high-performance digital interfaces with a
-        focus on functional minimalism and clean architecture.
-      </p>
+Building scalable, enterprise-grade interfaces with a passion for clean architecture and seamless user experiences.      </p>
     </div>
 
     <!-- CTA Buttons -->
@@ -71,14 +72,14 @@
         <span class="btn-arrow text-base transition-transform duration-200">→</span>
       </a>
 
-      <a href="/resume.pdf" class="inline-flex items-center justify-center gap-2.5
+      <a (click)="downloadResume()" class="inline-flex items-center justify-center gap-2.5
                 px-7 py-[14px] bg-transparent text-[#0a0a0a]
                 border border-[#0a0a0a] rounded-full
                 font-semibold text-[11px] tracking-[2px] uppercase
                 no-underline cursor-pointer
                 transition-all duration-200
                 hover:bg-[#0a0a0a] hover:text-white
-                sm:w-auto" download>
+                sm:w-auto">
         RESUME
         <span class="text-base">↓</span>
       </a>
@@ -101,7 +102,7 @@
           <circle cx="4" cy="4" r="2"></circle>
         </svg>
       </div>
-    </a><a href="https://github.com/adinahawaldar" target="_blank" rel="noopener noreferrer"
+    </a><a href="https://github.com/vishwa-limbani07" target="_blank" rel="noopener noreferrer"
       class="group flex items-center gap-4 text-zinc-400 transition-all duration-500"
       style="transition-delay: 900ms;"><span
         class="text-[10px] font-mono font-bold uppercase tracking-[0.2em] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-black">GitHub</span>
@@ -117,21 +118,6 @@
         </svg>
       </div>
     </a>
-    <!-- <a href="https://twitter.com/@adina_hawaldar" target="_blank" rel="noopener noreferrer"
-      class="group flex items-center gap-4 text-zinc-400 transition-all duration-500"
-      style="transition-delay: 1000ms;"><span
-        class="text-[10px] font-mono font-bold uppercase tracking-[0.2em] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-black">Twitter</span>
-      <div
-        class="p-3 rounded-full border border-transparent group-hover:border-zinc-100 group-hover:bg-black group-hover:text-white group-hover:rotate-[360deg] transition-all duration-500 ease-in-out">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="lucide lucide-twitter" aria-hidden="true">
-          <path
-            d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z">
-          </path>
-        </svg>
-      </div>
-    </a> -->
     <div class="h-24 w-[1px] bg-zinc-200 mr-[22px] mt-4"></div>
   </div>
   </div>

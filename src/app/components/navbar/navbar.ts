@@ -11,7 +11,7 @@ export class Navbar {
   activeSection: string = 'home';
   isMenuOpen = false;
 
-  sections = ['about', 'skills', 'projects', 'connect'];
+  sections = ['home', 'about', 'skills', 'projects', 'contact'];
 
   scrollTo(section: string) {
     document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });

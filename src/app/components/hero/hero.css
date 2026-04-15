@@ -5,7 +5,7 @@
 .hero-wrapper {
   width: 100%;
   min-height: 100vh;
-  background: #ffffff;
+  background: var(--bg-primary);
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -34,8 +34,8 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  padding-left: clamp(48px, 18vw, 290px);
-  padding-right: 100px;
+  padding-left: var(--spacing-x);
+  padding-right: var(--spacing-x);
   display: flex;
   flex-direction: column;
 }
@@ -46,7 +46,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 16px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-lightest);
   border-radius: 999px;
   width: fit-content;
   margin-bottom: 28px;
@@ -56,7 +56,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #22c55e;
+  background: var(--status-green);
   box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
   animation: pulse 2s infinite;
   flex-shrink: 0;
@@ -68,10 +68,10 @@
 }
 
 .badge-text {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-family-space);
   font-size: 9px;
   letter-spacing: 2.5px;
-  color: #374151;
+  color: var(--text-gray-lighter);
   text-transform: uppercase;
 }
 
@@ -84,10 +84,10 @@
 }
 
 .name-first {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--font-family-sans);
   font-weight: 800;
   font-size: clamp(88px, 11vw, 150px);
-  color: #0a0a0a;
+  color: var(--text-dark-alt);
   margin: 0;
   letter-spacing: -1px;
   text-transform: uppercase;
@@ -95,7 +95,7 @@
 }
 
 .name-last {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: var(--font-family-sans);
   font-weight: 800;
   font-size: clamp(88px, 11vw, 150px);
   color: #c2c2c2;

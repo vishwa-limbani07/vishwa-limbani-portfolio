@@ -1,24 +1,26 @@
 :host {
   display: block;
+  padding-left: var(--spacing-x);
+  padding-right: var(--spacing-x);
 }
 
 /* ---- Section Header ---- */
 .section-label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-family-mono);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: #9e9891;
+  color: var(--text-muted-alt);
 }
 
 .section-heading {
-  font-family: 'Instrument Serif', serif;
+  font-family: var(--font-family-sans);
   font-size: clamp(48px, 5.5vw, 72px);
-  font-weight: 400;
+  font-weight: 800;
   line-height: 1;
   text-transform: uppercase;
-  color: #1a1a1a;
+  color: var(--text-dark);
 }
 
 /* ---- Bento Grid ---- */
@@ -43,7 +45,7 @@
 }
 
 .bento-card {
-  background: #f9fafb;
+  background: var(--bg-light);
   padding: 40px;
   border-radius: 3rem;
   display: flex;
@@ -58,12 +60,12 @@
 }
 
 .bento-card:hover {
-  background: #f3f4f6;
+  background: var(--bg-lighter);
 }
 
 .bento-card-bordered {
-  background: #ffffff;
-  border: 1px solid #f3f4f6;
+  background: var(--bg-primary);
+  border: 1px solid var(--bg-lighter);
   padding: 40px;
   border-radius: 3rem;
   display: flex;
@@ -78,22 +80,22 @@
 }
 
 .bento-card-bordered:hover {
-  border-color: #e5e7eb;
+  border-color: var(--border-lighter);
 }
 
 .bento-icon {
   width: 40px;
   height: 40px;
   margin-bottom: 16px;
-  color: #d1d5db;
+  color: var(--icon-gray);
   transition: color 0.3s ease;
 }
 
 .bento-card-text {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-family-dm);
   font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--text-dark);
 }
 
 .bento-subtitle {
