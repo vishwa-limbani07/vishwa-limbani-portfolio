@@ -1,5 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* CSS Custom Properties (Variables) */
+:root {
+  /* Spacing & Layout */
+  --spacing-x: clamp(24px, 8vw, 300px);
+  
+  /* Font Families */
+  --font-family-serif: 'Instrument Serif', serif;
+  --font-family-sans: 'Barlow Condensed', sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+  --font-family-dm: 'DM Sans', sans-serif;
+  --font-family-space: 'Space Mono', monospace;
+
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-light: #f9f9f9;
+  --bg-lighter: #f3f4f6;
+  --bg-dark: #0a0e27;
+  --bg-accent: #00BFFF;
+  --bg-hover: #ebebeb;
+  --bg-card: #1a1a1a;
+
+  /* Font Colors */
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-dark: #1a1a1a;
+  --text-dark-alt: #0a0a0a;
+  --text-light: #8892B0;
+  --text-accent: #00BFFF;
+  --text-white: #ffffff;
+  --text-muted: #999999;
+  --text-muted-alt: #9e9891;
+  --text-muted-light: #c2c2c2;
+  --text-muted-lighter: #b0aba4;
+  --text-muted-alt2: #6b6560;
+  --text-muted-alt3: #d1cec8;
+  --text-gray: #6b7280;
+  --text-gray-light: #9ca3af;
+  --text-gray-lighter: #374151;
+
+  /* Border & Shadow Colors */
+  --border-light: #e5e5e5;
+  --border-lighter: #f3f4f6;
+  --border-lightest: #d1d5db;
+  --border-light-alt: #c4c0b9;
+
+  /* Status & Accent Colors */
+  --status-green: #22c55e;
+  --icon-gray: #d1d5db;
+
+  /* Font Weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+}
+
 @import 'tailwindcss';
 /* Tailwind */
 @tailwind base;
@@ -8,10 +67,11 @@
 
 /* Theme Variables */
 .nav-link {
-  @apply text-[#8892B0] cursor-pointer transition duration-300;
+  @apply cursor-pointer transition duration-300;
+  color: var(--text-light);
 }
 .nav-link:hover {
-  @apply text-[#00BFFF];
+  color: var(--text-accent);
 }
 html {
   scroll-behavior: smooth;
@@ -21,8 +81,8 @@ section {
   scroll-margin-top: 80px;
 }
 body {
-  background-color: #ffffff;
-  color: #333333;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: var(--font-regular);
 }

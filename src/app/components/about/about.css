@@ -6,6 +6,36 @@
 
 :host {
   display: block;
+  padding-left: var(--spacing-x);
+  padding-right: var(--spacing-x);
+}
+
+/* ---- Smooth Scroll Animations ---- */
+[data-aos] {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: translate(0) !important;
+}
+
+[data-aos~="fade-right"] {
+  transform: translateX(-30px);
+}
+
+[data-aos~="fade-up"] {
+  transform: translateY(20px);
+}
+
+[data-aos~="fade-left"] {
+  transform: translateX(30px);
+}
+
+[data-aos~="zoom-in"] {
+  transform: scale(0.95);
 }
 
 /* ---- Profile Image ---- */
@@ -20,12 +50,12 @@
 }
 
 .circle-text {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 8px;
-  font-weight: 500;
-  letter-spacing: 4.5px;
-  fill: #b0aba4;
-  text-transform: uppercase;
+    font-family: var(--font-family-mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    fill: #4a4a4a;
+    text-transform: uppercase;
 }
 
 @keyframes spin {
@@ -39,54 +69,54 @@
 
 /* ---- Typography ---- */
 .bio-label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-family-mono);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: #c2c2c2;
+  color: var(--text-muted-light);
 }
 
 .bio-heading {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(48px, 5.5vw, 72px);
-  font-weight: 400;
+  font-family: var(--font-family-sans);
+  font-size: clamp(48px, 5.5vw, 60px);
+  font-weight: 800;
   line-height: 1;
   text-transform: uppercase;
-  color: #1a1a1a;
+  color: var(--text-dark);
 }
 
 .bio-tagline {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-family-dm);
   font-size: 17px;
   font-weight: 600;
   line-height: 1.6;
-  color: #1a1a1a;
+  color: var(--text-dark);
 }
 
 .bio-description {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-family-dm);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.75;
-  color: #7a756e;
+  color: var(--text-muted);
 }
 
 .info-label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-family-mono);
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #c4c0b9;
+  color: var(--border-light-alt);
   margin-bottom: 6px;
 }
 
 .info-value {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-family-dm);
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--text-dark);
 }
 
 /* ---- Status Dot ---- */
@@ -95,7 +125,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #22c55e;
+  background-color: var(--status-green);
   position: relative;
   flex-shrink: 0;
 }
@@ -143,7 +173,6 @@
 }
 .profile-img-wrapper {
   margin-right: 40px;
-  margin-left: 50px;
 }
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
