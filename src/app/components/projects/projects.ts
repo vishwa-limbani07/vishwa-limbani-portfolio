@@ -74,6 +74,22 @@ export class Projects implements OnInit, AfterViewInit {
       tech: ['Angular', 'Tailwind', 'AOS'],
       image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97',
       color: '#f9fafb'
+    },
+    {
+      id: 7,
+      title: 'ProjectNest',
+      description: 'A comprehensive project management system for teams to organize tasks, track progress, and collaborate efficiently.',
+      tech: ['Angular', 'Node.js', 'MongoDB', 'Socket.io'],
+      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71',
+      color: '#f3f4f6'
+    },
+    {
+      id: 8,
+      title: 'CollabBoard',
+      description: 'An interactive whiteboard application allowing users to draw, add sticky notes, and share collaborative sessions in real-time.',
+      tech: ['Angular', 'Canvas API', 'WebSockets', 'Fabric.js'],
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978',
+      color: '#ffffff'
     }
   ];
 
