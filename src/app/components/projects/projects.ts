@@ -68,14 +68,6 @@ export class Projects implements OnInit, AfterViewInit {
       color: '#ffffff'
     },
     {
-      id: 6,
-      title: 'Developer Portfolio',
-      description: 'Modern portfolio with animations and smooth UI.',
-      tech: ['Angular', 'Tailwind', 'AOS'],
-      image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97',
-      color: '#f9fafb'
-    },
-    {
       id: 7,
       title: 'ProjectNest',
       description: 'A comprehensive project management system for teams to organize tasks, track progress, and collaborate efficiently.',
