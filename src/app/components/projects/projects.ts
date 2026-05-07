@@ -15,6 +15,8 @@ interface Project {
   tech: string[];
   image: string;
   color: string;
+  liveUrl?: string;
+  githubUrl?: string;
 }
 
 @Component({
@@ -30,18 +32,22 @@ export class Projects implements OnInit, AfterViewInit {
     {
       id: 1,
       title: 'TechAppForce',
-      description: 'A developer-first low-code platform designed for speed, flexibility, and enterprise-grade scalability.',
+      description: 'A developer-first low-code platform designed for speed, flexibility, and enterprise-grade scalability. Built complex dynamic forms, data grids, and multi-step workflows.',
       tech: ['Angular', 'TypeScript', 'REST APIs', 'Form.io', 'Syncfusion'],
-      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c',
-      color: '#f3f4f6'
+      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80',
+      color: '#f3f4f6',
+      liveUrl: '#',
+      githubUrl: '#'
     },
     {
       id: 2,
       title: 'Bank Loan Portal',
-      description: 'A customer-facing loan application portal designed to streamline loan requests.',
+      description: 'A customer-facing loan application portal designed to streamline loan requests and approvals with real-time validations, document uploads, and status tracking.',
       tech: ['Angular', 'TypeScript', 'RxJS', 'RESTful APIs'],
-      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f',
-      color: '#ffffff'
+      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80',
+      color: '#ffffff',
+      liveUrl: '#',
+      githubUrl: '#'
     },
     {
       id: 3,
@@ -94,7 +100,6 @@ export class Projects implements OnInit, AfterViewInit {
   async ngOnInit(): Promise<void> {
     if (this.isBrowser) {
       const AOS = (await import('aos')).default;
-
       AOS.init({
         duration: 800,
         once: true,
@@ -106,7 +111,6 @@ export class Projects implements OnInit, AfterViewInit {
   async ngAfterViewInit(): Promise<void> {
     if (this.isBrowser) {
       const AOS = (await import('aos')).default;
-
       setTimeout(() => {
         AOS.refresh();
       }, 100);
@@ -117,4 +121,3 @@ export class Projects implements OnInit, AfterViewInit {
     return i < 9 ? '0' + (i + 1) : (i + 1).toString();
   }
 }
-

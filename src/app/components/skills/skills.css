@@ -49,13 +49,19 @@
 /* ---- Pill Styling ---- */
 .marquee-pill {
   flex-shrink: 0;
-  padding: 16px 32px;
+  padding: 12px 20px;
   background: var(--bg-primary);
   border: 1px solid var(--border-light);
   border-radius: 16px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
   cursor: default;
   transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .marquee-pill {
+    padding: 16px 32px;
+  }
 }
 
 .marquee-pill:hover {
@@ -80,10 +86,16 @@
 
 .pill-text {
   font-family: var(--font-family-dm);
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text-dark);
   letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  .pill-text {
+    font-size: 18px;
+  }
 }
 
 /* ---- Keyframes ---- */

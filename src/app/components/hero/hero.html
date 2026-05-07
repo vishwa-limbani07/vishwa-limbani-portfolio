@@ -3,17 +3,17 @@
   <!-- Grid background lines -->
   <!-- <div class="grid-bg absolute inset-0 pointer-events-none z-0" aria-hidden="true"></div> -->
 <div class="grid-bg absolute inset-0 pointer-events-none z-0" aria-hidden="true">
-  <!-- Decorative chevron -->
- <svg 
-  class="absolute" 
-  style="left: 60%; top: 8%; opacity: 0.05;" 
-  viewBox="0 0 800 840" 
-  fill="none" 
+  <!-- Decorative chevron (hidden on mobile) -->
+ <svg
+  class="absolute hidden md:block"
+  style="left: 60%; top: 8%; opacity: 0.05; width: clamp(200px, 30vw, 500px);"
+  viewBox="0 0 800 840"
+  fill="none"
   xmlns="http://www.w3.org/2000/svg"
 >
-  <path d="M60 60 L280 270 L60 480" stroke="#000" stroke-width="72" 
+  <path d="M60 60 L280 270 L60 480" stroke="#000" stroke-width="72"
         stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="240" y1="480" x2="460" y2="480" stroke="#000" stroke-width="72" 
+  <line x1="240" y1="480" x2="460" y2="480" stroke="#000" stroke-width="72"
         stroke-linecap="round"/>
 </svg>
 </div>
