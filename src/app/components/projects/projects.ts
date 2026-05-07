@@ -1,4 +1,3 @@
-
 import {
   Component,
   OnInit,
@@ -15,8 +14,9 @@ interface Project {
   tech: string[];
   image: string;
   color: string;
-  liveUrl?: string;
-  githubUrl?: string;
+  liveUrl: string;
+  githubUrl: string;
+  githubBackendUrl?: string;
 }
 
 @Component({
@@ -31,63 +31,34 @@ export class Projects implements OnInit, AfterViewInit {
   projects: Project[] = [
     {
       id: 1,
-      title: 'TechAppForce',
-      description: 'A developer-first low-code platform designed for speed, flexibility, and enterprise-grade scalability. Built complex dynamic forms, data grids, and multi-step workflows.',
-      tech: ['Angular', 'TypeScript', 'REST APIs', 'Form.io', 'Syncfusion'],
-      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80',
+      title: 'ProjectNest',
+      description: 'A full-featured project management system with Kanban boards, drag-and-drop task tracking, squad management, real-time search, and five interactive analytics charts — built to demonstrate modern frontend architecture and scalable UI patterns.',
+      tech: ['React 18', 'Vite', 'TailwindCSS', 'Zustand', 'React Query', 'Recharts'],
+      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200&q=80',
       color: '#f3f4f6',
-      liveUrl: '#',
-      githubUrl: '#'
+      liveUrl: 'https://projectnest-io.vercel.app/',
+      githubUrl: 'https://github.com/vishwa-limbani07/pms-frontend',
+      githubBackendUrl: 'https://github.com/vishwa-limbani07/pms-backend'
     },
     {
       id: 2,
-      title: 'Bank Loan Portal',
-      description: 'A customer-facing loan application portal designed to streamline loan requests and approvals with real-time validations, document uploads, and status tracking.',
-      tech: ['Angular', 'TypeScript', 'RxJS', 'RESTful APIs'],
-      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80',
+      title: 'CollabBoard',
+      description: 'A real-time collaborative whiteboard where teams draw, sketch, and brainstorm together. Features live cursors, sticky notes, board persistence in MongoDB, undo/redo, zoom/pan, and one-click PNG export.',
+      tech: ['Angular 17', 'NestJS', 'MongoDB', 'Socket.io', 'Canvas API', 'JWT'],
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80',
       color: '#ffffff',
-      liveUrl: '#',
-      githubUrl: '#'
+      liveUrl: 'https://collabboard-chi.vercel.app/',
+      githubUrl: 'https://github.com/vishwa-limbani07/collabboard'
     },
     {
       id: 3,
-      title: 'Phoenix',
-      description: 'Insurance claim investigation platform with complex workflows.',
-      tech: ['Angular 13', 'TypeScript', 'Syncfusion'],
-      image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85',
-      color: '#f9fafb'
-    },
-    {
-      id: 4,
-      title: 'Project Management & CRM',
-      description: 'Platform for managing projects and client relationships.',
-      tech: ['Angular', 'TypeScript', 'REST APIs'],
-      image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12',
-      color: '#f3f4f6'
-    },
-    {
-      id: 5,
-      title: 'Data Analysis Platform',
-      description: 'Dynamic tool with real-time validations and dashboards.',
-      tech: ['Angular', 'SQL', 'RxJS'],
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71',
-      color: '#ffffff'
-    },
-    {
-      id: 7,
-      title: 'ProjectNest',
-      description: 'A comprehensive project management system for teams to organize tasks, track progress, and collaborate efficiently.',
-      tech: ['Angular', 'Node.js', 'MongoDB', 'Socket.io'],
-      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71',
-      color: '#f3f4f6'
-    },
-    {
-      id: 8,
-      title: 'CollabBoard',
-      description: 'An interactive whiteboard application allowing users to draw, add sticky notes, and share collaborative sessions in real-time.',
-      tech: ['Angular', 'Canvas API', 'WebSockets', 'Fabric.js'],
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978',
-      color: '#ffffff'
+      title: 'InsightHub',
+      description: 'A self-service analytics dashboard that turns raw CSV/JSON data into interactive charts. Features a visual chart builder, server-side aggregation engine, AI-powered natural language queries via Google Gemini, and a real-time live data feed over SSE.',
+      tech: ['Angular 21', 'Node.js', 'Chart.js', 'Google Gemini AI', 'MongoDB', 'SSE'],
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
+      color: '#f9fafb',
+      liveUrl: 'https://insighthub-cyan.vercel.app/',
+      githubUrl: 'https://github.com/vishwa-limbani07/insighthub'
     }
   ];
 
