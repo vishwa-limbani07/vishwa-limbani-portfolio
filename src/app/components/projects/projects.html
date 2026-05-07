@@ -2,7 +2,7 @@
 <section class="relative z-10 w-full py-12">
 
   <!-- Section Header -->
-  <div class="mb-16 md:mb-20">
+  <div class="mb-10 md:mb-14">
     <div class="flex items-center gap-4 mb-6" data-aos="fade-right">
       <div class="h-[1px] w-12 bg-[#c4c0b9]"></div>
       <span class="section-label">Work</span>
@@ -23,13 +23,26 @@
     >
 
       <!-- Image Side -->
-      <div class="project-image-wrap group">
+      <div
+        class="project-image-wrap"
+        (mouseenter)="onImageMouseEnter(i)"
+        (mousemove)="onImageMouseMove($event)"
+        (mouseleave)="onImageMouseLeave($event, i)"
+      >
+        <!-- Stacked images — active one fades in -->
         <img
-          [src]="project.image"
-          [alt]="project.title"
+          *ngFor="let img of project.images; let ii = index"
+          [src]="img"
+          [alt]="project.title + ' screenshot ' + (ii + 1)"
           class="project-img"
+          [class.project-img--active]="activeIndices[i] === ii"
           loading="lazy"
         />
+
+        <!-- Glowing border overlay (decorative, pointer-events: none) -->
+        <div class="project-image-glow"></div>
+
+        <!-- Live preview overlay -->
         <div class="project-image-overlay">
           <a
             [href]="project.liveUrl"
@@ -40,6 +53,31 @@
             View Live <span class="ml-1">↗</span>
           </a>
         </div>
+
+        <!-- Image counter — top right -->
+        <div class="image-counter" *ngIf="project.images.length > 1">
+          {{ activeIndices[i] + 1 }} / {{ project.images.length }}
+        </div>
+
+        <!-- Progress bar — bottom edge -->
+        <div class="image-progress" *ngIf="project.images.length > 1">
+          <div
+            class="image-progress-bar"
+            [style.width.%]="progressPercents[i]"
+          ></div>
+        </div>
+
+        <!-- Clickable segment indicators -->
+        <div class="image-segments" *ngIf="project.images.length > 1">
+          <button
+            *ngFor="let img of project.images; let ii = index"
+            class="image-segment"
+            [class.image-segment--active]="activeIndices[i] === ii"
+            (click)="setActiveImage(i, ii); $event.stopPropagation()"
+            [attr.aria-label]="'View screenshot ' + (ii + 1)"
+          ></button>
+        </div>
+
         <div class="project-image-num">{{ getIndex(i) }}</div>
       </div>
 
@@ -97,7 +135,6 @@
             </svg>
             Backend
           </a>
-
         </div>
       </div>
 

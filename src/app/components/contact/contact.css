@@ -4,7 +4,7 @@
   padding-right: var(--spacing-x);
 }
 
-/* ---- Section Header ---- */
+/* ── Section Header ─────────────────────────────────────── */
 .section-label {
   font-family: var(--font-family-mono);
   font-size: 10px;
@@ -16,174 +16,435 @@
 
 .section-heading {
   font-family: var(--font-family-sans);
-  font-size: clamp(48px, 5.5vw, 72px);
+  font-size: clamp(40px, 5.5vw, 72px);
   font-weight: 800;
   line-height: 1;
   text-transform: uppercase;
   color: var(--text-dark);
 }
 
-/* ---- Bento Grid ---- */
-.bento-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(28px, 3vw, 40px);
-  font-weight: 400;
-  line-height: 1.2;
-  text-transform: uppercase;
+/* ── Contact Grid ───────────────────────────────────────── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
 }
 
-.bento-badge {
-  padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 100px;
-  font-family: 'JetBrains Mono', monospace;
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+  }
+}
+
+/* ── Form Side ──────────────────────────────────────────── */
+.contact-intro {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #6b7280;
+  margin-bottom: 2rem;
+  max-width: 460px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-family: var(--font-family-mono);
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: #9ca3af;
 }
 
-.bento-card {
-  background: var(--bg-light);
-  padding: 40px;
-  border-radius: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-  transition: background 0.3s ease;
-}
-
-.bento-card:hover {
-  background: var(--bg-lighter);
-}
-
-.bento-card-bordered {
-  background: var(--bg-primary);
-  border: 1px solid var(--bg-lighter);
-  padding: 40px;
-  border-radius: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-  transition: border-color 0.3s ease;
-}
-
-.bento-card-bordered:hover {
-  border-color: var(--border-lighter);
-}
-
-.bento-icon {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 16px;
-  color: var(--icon-gray);
-  transition: color 0.3s ease;
-}
-
-.bento-card-text {
-  font-family: var(--font-family-dm);
+.form-input {
+  width: 100%;
+  padding: 13px 16px;
+  background: #f9f9f9;
+  border: 1.5px solid #ebebeb;
+  border-radius: 12px;
+  font-family: var(--font-family-dm), 'DM Sans', sans-serif;
   font-size: 14px;
-  font-weight: 600;
-  color: var(--text-dark);
+  color: #0a0a0a;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  resize: none;
 }
 
-.bento-subtitle {
-  font-family: 'Instrument Serif', serif;
-  font-size: 24px;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: #1a1a1a;
+.form-input::placeholder {
+  color: #c4c4c4;
+}
+
+.form-input:focus {
+  border-color: #0a0a0a;
+  background: #fff;
+}
+
+.form-textarea {
+  min-height: 140px;
+  line-height: 1.7;
+}
+
+.form-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: #0a0a0a;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-family-dm), 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.25s, opacity 0.25s, transform 0.2s;
+  align-self: flex-start;
+}
+
+.form-submit:hover:not(:disabled) {
+  background: #333;
+  transform: translateY(-1px);
+}
+
+.form-submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.form-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.form-feedback {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.form-feedback--success {
+  color: #16a34a;
+}
+
+.form-feedback--error {
+  color: #dc2626;
+}
+
+.form-feedback--error a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* ── Info Side ──────────────────────────────────────────── */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-availability {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 8px;
 }
 
-.cv-arrow {
-  width: 64px;
-  height: 64px;
+.info-avail-dot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: #f9fafb;
+  background: #22c55e;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2); }
+  50%       { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.06); }
+}
+
+.info-avail-text {
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #22c55e;
+}
+
+/* Info cards */
+.info-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: #f9f9f9;
+  border: 1.5px solid #ebebeb;
+  border-radius: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.info-card--clickable {
+  cursor: pointer;
+}
+
+.info-card--clickable:hover {
+  border-color: #0a0a0a;
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.info-card--dark {
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.info-card--dark:hover {
+  background: #222;
+  transform: translateY(-2px);
+}
+
+.info-card-icon {
+  width: 40px;
+  height: 40px;
+  background: #ebebeb;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1a1a1a;
+  color: #6b7280;
   flex-shrink: 0;
-  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* ---- Footer ---- */
-.footer-logo {
-  font-family: 'Instrument Serif', serif;
-  font-size: 32px;
-  font-weight: 400;
-  color: #1a1a1a;
+.info-card-icon--light {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
 }
 
-.footer-col-label {
-  font-family: 'JetBrains Mono', monospace;
+.info-card-label {
+  font-family: var(--font-family-mono);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 2px;
+}
+
+.info-card-label--light { color: rgba(255, 255, 255, 0.5); }
+
+.info-card-value {
+  font-family: var(--font-family-dm), 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0a0a0a;
+}
+
+.info-card-value--light { color: #fff; }
+
+.info-card-arrow {
+  margin-left: auto;
+  font-size: 16px;
+  color: #c4c4c4;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.info-card-arrow--light { color: rgba(255, 255, 255, 0.4); }
+
+.info-card--clickable:hover .info-card-arrow {
+  color: #0a0a0a;
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+.site-footer {
+  padding: 4rem var(--spacing-x) 2.5rem;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 5rem;
+}
+
+.footer-inner {
+  max-width: 100%;
+}
+
+.footer-top {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .footer-top {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.footer-brand {
+  flex-shrink: 0;
+}
+
+.footer-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: #0a0a0a;
+  margin-bottom: 10px;
+}
+
+.footer-tagline {
+  font-family: var(--font-family-dm), 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 2.5rem;
+  flex-shrink: 0;
+}
+
+.footer-nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-nav-label {
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #d1cec8;
 }
 
+.footer-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .footer-link {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: #1a1a1a;
-  cursor: pointer;
-  transition: color 0.3s ease;
+  font-family: var(--font-family-dm), 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
   text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
   display: block;
 }
 
 .footer-link:hover {
-  color: #9e9891;
+  color: #0a0a0a;
 }
 
-.footer-copyright {
-  font-family: 'JetBrains Mono', monospace;
+.footer-divider {
+  height: 1px;
+  background: #f0f0f0;
+  margin-bottom: 1.5rem;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.footer-copy {
+  font-family: var(--font-family-mono);
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #d1cec8;
+  color: #c4c4c4;
+}
+
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .footer-legal {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-family-mono);
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #d1cec8;
+  color: #c4c4c4;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color 0.2s;
 }
 
 .footer-legal:hover {
-  color: #1a1a1a;
+  color: #0a0a0a;
 }
 
-/* ---- Responsive ---- */
-@media (max-width: 768px) {
-  .bento-title {
-    font-size: 28px;
-  }
-
-  .bento-badge {
-    padding: 8px 16px;
-    font-size: 9px;
-  }
+.footer-legal-sep {
+  color: #e5e5e5;
+  font-size: 12px;
 }
