@@ -172,7 +172,13 @@
   transform: translateY(-1px);
 }
 .profile-img-wrapper {
-  margin-right: 40px;
+  margin-right: 0;
+}
+
+@media (min-width: 1024px) {
+  .profile-img-wrapper {
+    margin-right: 40px;
+  }
 }
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
