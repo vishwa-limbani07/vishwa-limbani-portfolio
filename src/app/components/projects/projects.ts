@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  OnDestroy,
-  Inject,
-  PLATFORM_ID
-} from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 interface Project {
@@ -25,15 +18,15 @@ interface Project {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './projects.html',
-  styleUrls: ['./projects.css']
+  styleUrls: ['./projects.css'],
 })
 export class Projects implements OnInit, AfterViewInit, OnDestroy {
-
   projects: Project[] = [
     {
       id: 1,
       title: 'Nexus',
-      description: 'A full-featured project management system with Kanban boards, drag-and-drop task tracking, squad management, real-time search, and five interactive analytics charts — built to demonstrate modern frontend architecture and scalable UI patterns.',
+      description:
+        'A full-featured project management system with Kanban boards, drag-and-drop task tracking, squad management, real-time search, and five interactive analytics charts — built to demonstrate modern frontend architecture and scalable UI patterns.',
       tech: ['React 18', 'Vite', 'TailwindCSS', 'Zustand', 'React Query', 'Recharts'],
       images: [
         '/assets/images/projects/nexus/nexus_1.png',
@@ -44,12 +37,13 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
       color: '#f3f4f6',
       liveUrl: 'https://projectnest-io.vercel.app/',
       githubUrl: 'https://github.com/vishwa-limbani07/pms-frontend',
-      githubBackendUrl: 'https://github.com/vishwa-limbani07/pms-backend'
+      githubBackendUrl: 'https://github.com/vishwa-limbani07/pms-backend',
     },
     {
       id: 2,
       title: 'CollabBoard',
-      description: 'A real-time collaborative whiteboard where teams draw, sketch, and brainstorm together. Features live cursors, sticky notes, board persistence in MongoDB, undo/redo, zoom/pan, and one-click PNG export.',
+      description:
+        'A real-time collaborative whiteboard where teams draw, sketch, and brainstorm together. Features live cursors, sticky notes, board persistence in MongoDB, undo/redo, zoom/pan, and one-click PNG export.',
       tech: ['Angular 17', 'NestJS', 'MongoDB', 'Socket.io', 'Canvas API', 'JWT'],
       images: [
         '/assets/images/projects/collabboard/collabboard_1.png',
@@ -59,32 +53,58 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
       ],
       color: '#ffffff',
       liveUrl: 'https://collabboard-chi.vercel.app/',
-      githubUrl: 'https://github.com/vishwa-limbani07/collabboard'
+      githubUrl: 'https://github.com/vishwa-limbani07/collabboard',
     },
     {
       id: 3,
-      title: 'Viroza',
-      description: 'A self-service analytics dashboard that turns raw CSV/JSON data into interactive charts. Features a visual chart builder, server-side aggregation, AI-powered natural language queries via Google Gemini, and a real-time live data feed over SSE.',
+      title: 'Vizora',
+      description:
+        'A self-service analytics dashboard that turns raw CSV/JSON data into interactive charts. Features a visual chart builder, server-side aggregation, AI-powered natural language queries via Google Gemini, and a real-time live data feed over SSE.',
       tech: ['Angular 21', 'Node.js', 'Chart.js', 'Google Gemini AI', 'MongoDB', 'SSE'],
       images: [
-        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
+        '/assets/images/projects/vizora/Vizora_web_1.png',
+        '/assets/images/projects/vizora/Vizora_web_2.png',
+        '/assets/images/projects/vizora/Vizora_web_3.png',
+        '/assets/images/projects/vizora/Vizora_web_4.png',
+        '/assets/images/projects/vizora/Vizora_mobile_1.png',
       ],
       color: '#f9fafb',
       liveUrl: 'https://insighthub-cyan.vercel.app/',
-      githubUrl: 'https://github.com/vishwa-limbani07/insighthub'
+      githubUrl: 'https://github.com/vishwa-limbani07/insighthub',
     },
     {
       id: 4,
       title: 'Portfolio',
-      description: 'This portfolio — a handcrafted developer showcase built with Angular 21, SSR, and Tailwind CSS. Features fluid clamp-based typography, scroll-triggered animations, a fully responsive layout, and smooth Lenis scrolling across all breakpoints.',
+      description:
+        'This portfolio — a handcrafted developer showcase built with Angular 21, SSR, and Tailwind CSS. Features fluid clamp-based typography, scroll-triggered animations, a fully responsive layout, and smooth Lenis scrolling across all breakpoints.',
       tech: ['Angular 21', 'TailwindCSS', 'TypeScript', 'AOS', 'Lenis', 'SSR'],
       images: [
-        'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80',
+        '/assets/images/projects/portfolio/portfolio_1.png',
+        '/assets/images/projects/portfolio/portfolio_2.png',
+        '/assets/images/projects/portfolio/portfolio_3.png',
+        '/assets/images/projects/portfolio/portfolio_4.png',
       ],
       color: '#f3f4f6',
       liveUrl: 'https://vishwa-limbani.vercel.app',
-      githubUrl: 'https://github.com/vishwa-limbani07/vishwa-limbani-portfolio'
-    }
+      githubUrl: 'https://github.com/vishwa-limbani07/vishwa-limbani-portfolio',
+    },
+    {
+      id: 5,
+      title: 'NexFlow',
+      description:
+        'A high-fidelity SaaS marketing website for an AI-powered workflow automation platform. Features GSAP scroll-triggered animations, a pinned multi-step "How It Works" section, interactive particle canvas with mouse-repel physics, custom cursor, animated stat counters, magnetic buttons, and a fully responsive floating pill navbar.',
+      tech: ['HTML5', 'CSS3', 'JavaScript', 'GSAP 3', 'ScrollTrigger', 'Canvas API'],
+      images: [
+        '/assets/images/projects/nexflow/nexflow_web_1.png',
+        '/assets/images/projects/nexflow/nexflow_web_2.png',
+        '/assets/images/projects/nexflow/nexflow_web_3.png',
+        '/assets/images/projects/nexflow/nexflow_web_4.png',
+        '/assets/images/projects/nexflow/nexflow_mobile_1.png',
+      ],
+      color: '#f97316',
+      liveUrl: 'https://nexflow-psi.vercel.app/',
+      githubUrl: 'https://github.com/vishwa-limbani07/nexflow',
+    },
   ];
 
   activeIndices: number[] = [];
@@ -117,7 +137,7 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.intervals.forEach(id => clearInterval(id));
+    this.intervals.forEach((id) => clearInterval(id));
   }
 
   setActiveImage(pi: number, ii: number): void {
@@ -143,7 +163,7 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
 
   onImageMouseLeave(event: MouseEvent, pi: number): void {
     const wrap = event.currentTarget as HTMLElement;
-    wrap.querySelectorAll<HTMLElement>('.project-img').forEach(img => {
+    wrap.querySelectorAll<HTMLElement>('.project-img').forEach((img) => {
       img.style.transform = '';
     });
     this.resumeAutoPlay(pi);
