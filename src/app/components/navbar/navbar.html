@@ -1,23 +1,24 @@
-<nav class="navbar fixed top-0 w-full z-[100] transition-all duration-500 bg-transparent py-6" [class.scrolled]="isScrolled">
+<nav class="navbar" [class.scrolled]="isScrolled">
 
-<div class="flex items-center gap-2 cursor-pointer group">
-  <div class="w-2 h-2 bg-[#141414] rounded-full flex-shrink-0 group-hover:scale-150 transition-transform"></div>
-  <span class="font-bold text-lg tracking-tight">vishwa.</span>
-</div>
+  <!-- Brand / Logo -->
+  <div class="navbar-brand" (click)="scrollTo('home')">
+    <div class="brand-dot"></div>
+    <span class="brand-name">vishwa.</span>
+  </div>
+
+  <!-- Desktop Nav Links -->
   <ul class="navbar-links">
     <li *ngFor="let section of sections">
       <a
         (click)="scrollTo(section)"
-        class="relative text-[12px] font-semibold uppercase tracking-widest text-zinc-500 hover:text-black transition-colors duration-300 group"
+        class="nav-link"
         [class.active]="activeSection === section"
-      >
-        {{ section | uppercase }}
-      </a>
+      >{{ section | uppercase }}</a>
     </li>
   </ul>
 
   <!-- Mobile Hamburger -->
-  <button class="hamburger" (click)="isMenuOpen = !isMenuOpen" aria-label="Toggle menu">
+  <button class="hamburger" (click)="isMenuOpen = !isMenuOpen" [class.open]="isMenuOpen" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
 
@@ -27,5 +28,5 @@
       {{ section | uppercase }}
     </a>
   </div>
-</nav>
 
+</nav>

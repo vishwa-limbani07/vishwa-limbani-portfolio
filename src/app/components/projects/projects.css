@@ -11,15 +11,16 @@
   font-weight: 600;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: var(--text-muted-alt);
+  color: var(--text-title-grey);
 }
 
 .section-heading {
-  font-family: var(--font-family-sans);
-  font-size: clamp(40px, 5.5vw, 72px);
+  font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif !important;
+  font-size: clamp(56px, 7vw, 110px);
   font-weight: 800;
-  line-height: 1;
-  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  text-transform: none;
   color: var(--text-dark);
 }
 
@@ -241,7 +242,7 @@
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.3em;
-  color: var(--text-muted-alt3);
+  color: var(--text-title-grey);
   text-transform: uppercase;
 }
 
@@ -258,7 +259,7 @@
 .project-desc {
   font-size: clamp(13px, 1.2vw, 15px);
   line-height: 1.8;
-  color: #6b7280;
+  color: var(--text-title-grey);
   margin: 0;
   max-width: 440px;
 }
