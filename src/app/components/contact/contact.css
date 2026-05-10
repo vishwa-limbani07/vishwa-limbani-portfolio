@@ -11,16 +11,22 @@
   font-weight: 600;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: var(--text-muted-alt);
+  color: var(--text-title-grey);
 }
 
 .section-heading {
-  font-family: var(--font-family-sans);
-  font-size: clamp(40px, 5.5vw, 72px);
+  font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif !important;
+  font-size: clamp(56px, 7vw, 110px);
   font-weight: 800;
-  line-height: 1;
-  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  text-transform: none;
   color: var(--text-dark);
+}
+
+.section-heading .accent-italic {
+  font-weight: 700;
+  font-style: normal;
 }
 
 /* ── Contact Grid ───────────────────────────────────────── */
@@ -49,7 +55,7 @@
 .contact-intro {
   font-size: 14px;
   line-height: 1.8;
-  color: #6b7280;
+  color: var(--text-title-grey);
   margin-bottom: 2rem;
   max-width: 460px;
 }
@@ -84,7 +90,7 @@
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #9ca3af;
+  color: var(--text-title-grey);
 }
 
 .form-input {
@@ -274,7 +280,7 @@
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #9ca3af;
+  color: var(--text-title-grey);
   margin-bottom: 2px;
 }
 
@@ -342,11 +348,12 @@
 }
 
 .footer-tagline {
-  font-family: var(--font-family-dm), 'DM Sans', sans-serif;
+  font-family: var(--font-family-ui), 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   line-height: 1.7;
-  color: #9ca3af;
+  color: var(--text-title-grey);
   margin: 0;
+  max-width: 280px;
 }
 
 .footer-nav {
@@ -367,7 +374,7 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #d1cec8;
+  color: var(--text-title-grey);
 }
 
 .footer-nav-list {
@@ -380,10 +387,10 @@
 }
 
 .footer-link {
-  font-family: var(--font-family-dm), 'DM Sans', sans-serif;
+  font-family: var(--font-family-ui), 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
   font-weight: 500;
-  color: #6b7280;
+  color: var(--text-title-grey);
   text-decoration: none;
   cursor: pointer;
   transition: color 0.2s;

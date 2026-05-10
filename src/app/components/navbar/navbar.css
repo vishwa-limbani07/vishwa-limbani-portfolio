@@ -1,100 +1,138 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono&display=swap');
-
-/* ─── Navbar ────────────────────────────────────────── */
+/* ─── Navbar Base ────────────────────────────────────── */
 .navbar {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
   z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* Same horizontal padding as hero-content so logo & name align */
-  padding: 20px var(--spacing-x) 20px var(--spacing-x);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  padding: 22px var(--spacing-x);
+  background: transparent;
+  border-radius: 0;
+  border: 1px solid transparent;
+  transition:
+    width 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    top 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.4s ease,
+    border-radius 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
 }
-/* On scroll — frosted glass */
+
+/* ─── Scrolled → Pill ────────────────────────────────── */
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.04);
-  padding-top: 14px;    /* slightly shrinks on scroll */
-  padding-bottom: 14px;
+  width: min(800px, 92vw);
+  top: 14px;
+  padding: 10px 28px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-radius: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.07),
+    0 1px 4px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
-/* ─── Logo ──────────────────────────────────────────── */
-.navbar-logo {
+
+/* ─── Brand / Logo ───────────────────────────────────── */
+.navbar-brand {
   display: flex;
-  flex-direction: column;
-  line-height: 1;
-  cursor: default;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
   user-select: none;
+  flex-shrink: 0;
 }
 
-.logo-first {
+.brand-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--text-dark);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s;
+}
 
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.5px;
+.navbar-brand:hover .brand-dot {
+  transform: scale(1.6);
+  background: #f97316;
+}
+
+.brand-name {
+  font-family: var(--font-family-display);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.3px;
   color: var(--text-dark);
+  transition: color 0.25s;
 }
 
-.logo-last {
-
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.5px;
-}
-
-.logo-subtitle {
-  font-family: var(--font-family-space);
-  font-size: 7.5px;
-  letter-spacing: 3px;
-  color: var(--text-gray-light);
-  margin-top: 3px;
+.navbar-brand:hover .brand-name {
+  color: #000;
 }
 
 /* ─── Nav Links ─────────────────────────────────────── */
 .navbar-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 36px;
   list-style: none;
   margin: 0;
   padding: 0;
-  cursor: pointer;
 }
 
 .nav-link {
-
-  font-weight: 600;
-  font-size: 12px;
-  letter-spacing: 1.5px;
+  font-family: var(--font-family-ui);
+  font-weight: 500;
+  font-size: 11.5px;
+  letter-spacing: 1.4px;
   color: var(--text-gray);
   cursor: pointer;
   text-decoration: none;
-  position: relative;
-  transition: color 0.25s;
   text-transform: uppercase;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.25s ease;
 }
 
+/* Dot active indicator */
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1.5px;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
   background: var(--text-dark);
-  transition: width 0.25s ease;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s;
+  opacity: 0;
 }
 
-.nav-link:hover { color: var(--text-dark); }
-.nav-link:hover::after,
-.nav-link.active::after { width: 100%; }
-.nav-link.active { color: var(--text-dark); }
+.nav-link:hover {
+  color: var(--text-dark);
+}
+
+.nav-link:hover::after {
+  transform: translateX(-50%) scale(1);
+  opacity: 0.35;
+}
+
+.nav-link.active {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+}
 
 /* ─── Hamburger ─────────────────────────────────────── */
 .hamburger {
@@ -111,9 +149,23 @@
   display: block;
   width: 22px;
   height: 2px;
-  background: #000;
+  background: var(--text-dark);
   border-radius: 2px;
-  transition: all 0.3s;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ─── Mobile Menu ───────────────────────────────────── */
@@ -121,53 +173,76 @@
   display: none;
   position: fixed;
   top: 70px;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border-top: 1px solid #e5e7eb;
+  left: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 20px;
   flex-direction: column;
-  padding: 24px 32px;
-  gap: 20px;
+  padding: 20px 28px;
+  gap: 4px;
   opacity: 0;
-  transform: translateY(-8px);
+  transform: translateY(-10px) scale(0.98);
   pointer-events: none;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-menu.open {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
   pointer-events: all;
 }
 
 .mobile-link {
-
-  font-weight: 600;
+  font-family: var(--font-family-ui);
+  font-weight: 500;
   font-size: 12px;
-  letter-spacing: 2px;
-  color: #374151;
+  letter-spacing: 1.8px;
+  color: var(--text-gray);
   cursor: pointer;
   text-decoration: none;
-  padding: 8px 0;
-  border-bottom: 1px solid #f3f4f6;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   text-transform: uppercase;
   transition: color 0.2s;
 }
 
-.mobile-link:hover { color: #000; }
+.mobile-link:last-child {
+  border-bottom: none;
+}
+
+.mobile-link:hover {
+  color: var(--text-dark);
+}
 
 /* ─── Responsive ────────────────────────────────────── */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .navbar {
-    padding-left: clamp(32px, 8vw, 80px);
-    padding-right: clamp(32px, 8vw, 80px);
+    padding: 16px 24px;
+  }
+
+  /* Keep pill disabled on mobile — full-width glass instead */
+  .navbar.scrolled {
+    width: 100%;
+    top: 0;
+    border-radius: 0;
+    padding: 14px 24px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: flex;
   }
 }
-
-@media (max-width: 768px) {
-  .navbar { padding: 16px 24px; }
-  .navbar-links { display: none; }
-  .hamburger { display: flex; }
-  .mobile-menu { display: flex; }
-}
-
