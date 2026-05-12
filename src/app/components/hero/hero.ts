@@ -10,7 +10,7 @@ import { Component, Inject, NgZone, OnDestroy, OnInit, PLATFORM_ID } from '@angu
 })
 export class HeroComponent implements OnInit, OnDestroy {
   // Rotating role line
-  roles = ['Frontend Engineer', 'Angular Specialist', 'UI Architect', 'Product Builder'];
+  roles = ['Fullstack Developer', 'Angular Specialist', 'UI Architect', 'Product Builder'];
   roleIndex = 0;
 
   // Deck card rotation (0 = profile, 1 = stats, 2 = location)
@@ -18,7 +18,7 @@ export class HeroComponent implements OnInit, OnDestroy {
 
   // Live local time (Pune, IN)
   localTime = '';
-  location = 'Pune, India';
+  location = 'Gujarat, India';
   timezone = 'Asia/Kolkata';
 
   // What you're currently shipping

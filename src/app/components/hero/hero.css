@@ -610,13 +610,29 @@
 /* Tablet — single column, deck centered */
 @media (max-width: 1023px) {
   .hero-wrapper { padding-top: 100px; min-height: auto; }
-  .hero-grid { gap: 16px; align-items: center; }
+  .hero-grid { gap: 0; align-items: center; }
+
+  .hero-left {
+    align-items: center;
+    text-align: center;
+  }
+
+  .name-block { align-items: center; }
+
+  .role-row { align-items: center; }
+
+  .role-line { justify-content: center; }
+
+  .hero-description { text-align: center; max-width: 480px; margin: 0 auto; }
+
+  .hero-ctas { justify-content: center; }
+
   .hero-right {
     max-width: 380px;
     margin: 0 auto;
     width: 100%;
   }
-  .v-deck { min-height: 280px; }
+  .v-deck { min-height: 220px; }
   .deck-card { width: min(100%, 300px); padding: 22px 20px; }
   .deck-card--back  { transform: translateX(-32px) translateY(14px) rotate(-7deg) scale(0.93); }
   .deck-card--mid   { transform: translateX(28px) translateY(10px) rotate(5deg) scale(0.95); }
@@ -628,7 +644,7 @@
 /* Mobile landscape / small tablets */
 @media (max-width: 768px) {
   .hero-wrapper { padding-top: 88px; }
-  .hero-grid { padding-bottom: 48px; gap: 12px; }
+  .hero-grid { padding-bottom: 20px; gap: 0; }
 
   .name-first,
   .name-last,
@@ -643,9 +659,9 @@
   .role-row { flex-direction: column; gap: 14px; }
   .hero-description { max-width: 100%; font-size: 13px; }
 
-  .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
+  .hero-ctas { flex-direction: column; align-items: center; gap: 10px; }
   .hero-ctas .btn-primary,
-  .hero-ctas .btn-outline { width: 100%; justify-content: center; }
+  .hero-ctas .btn-outline { width: 100%; max-width: 320px; justify-content: center; }
   .hero-socials {
     margin-left: 0;
     padding-left: 0;
@@ -655,7 +671,7 @@
   }
 
   .hero-right { max-width: 380px; }
-  .v-deck { min-height: 260px; }
+  .v-deck { min-height: 200px; }
   .deck-card { width: min(100%, 280px); padding: 20px 18px; border-radius: 18px; }
   .deck-card--back  { transform: translateX(-26px) translateY(12px) rotate(-6deg) scale(0.93); }
   .deck-card--mid   { transform: translateX(24px) translateY(8px) rotate(5deg) scale(0.95); }
@@ -674,7 +690,7 @@
 /* Small mobile */
 @media (max-width: 480px) {
   .hero-wrapper { padding-top: 76px; }
-  .hero-grid { padding: 20px var(--spacing-x) 40px; gap: 8px; }
+  .hero-grid { padding: 16px var(--spacing-x) 16px; gap: 0; }
 
   .name-first,
   .name-last,
@@ -695,7 +711,7 @@
   .btn-outline { padding: 12px 20px; font-size: 11px; }
 
   .hero-right { max-width: 100%; }
-  .v-deck { min-height: 230px; }
+  .v-deck { min-height: 190px; }
   .deck-card {
     width: min(100%, 250px);
     padding: 18px 16px;
