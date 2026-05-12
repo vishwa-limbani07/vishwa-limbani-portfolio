@@ -6,6 +6,7 @@
 
 :host {
   display: block;
+  width: 100%;
   padding-left: var(--spacing-x);
   padding-right: var(--spacing-x);
 }
@@ -193,3 +194,107 @@
     max-width: 320px;
   }
 }
+
+/* ── V6 SVG growth labels ── */
+.growth-marker-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+.growth-step-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+/* ── V6 horizontal growth animations ── */
+
+/* Cards rise into place with stagger */
+.v6-card-rise {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: v6CardRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+@keyframes v6CardRise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Current card gentle float (starts after the card has risen in) */
+.v6-float > div {
+  animation: v6Float 5s ease-in-out infinite alternate;
+  animation-delay: 3.5s;
+}
+@keyframes v6Float {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-6px); }
+}
+
+/* Top-left ascending bars fade up */
+.v6-rise-in {
+  animation: v6RiseIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.3s;
+}
+@keyframes v6RiseIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 0.6; transform: translateY(0); }
+}
+
+/* Top-right floating tag fade down */
+.v6-fade-down {
+  animation: v6FadeDown 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.5s;
+}
+@keyframes v6FadeDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* SVG growth line reveal — clipPath rect grows left-to-right, uncovering the dashed line in step with the cards */
+.v6-reveal-rect {
+  animation: v6Reveal 2.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.2s;
+}
+@keyframes v6Reveal {
+  from { width: 0; }
+  to   { width: 1200px; }
+}
+
+/* Experience section full-bleed — breaks out of the host's --spacing-x padding so it spans the full section width.
+   Width must be extended; negative margins alone only shift, they don't grow the box. */
+.experience-full-bleed {
+  width: calc(100% + var(--spacing-x) * 2);
+  margin-left: calc(var(--spacing-x) * -1);
+  margin-right: calc(var(--spacing-x) * -1);
+  padding-left: clamp(4px, 0.5vw, 14px);
+  padding-right: clamp(4px, 0.5vw, 14px);
+  box-sizing: border-box;
+}
+
+/* End-of-journey star: subtle continuous slow rotation after pop-in */
+.v6-end-star {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: v6Pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             v6StarSpin 14s linear 1s infinite;
+  animation-delay: var(--marker-delay, 0ms), calc(var(--marker-delay, 0ms) + 0.7s);
+}
+@keyframes v6StarSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Milestone markers pop in */
+.v6-marker-pop {
+  transform-origin: center;
+  transform: scale(0);
+  animation: v6Pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: var(--marker-delay, 600ms);
+}
+@keyframes v6Pop {
+  to { transform: scale(1); }
+}
+
+/* SVG track container holds path animations together */
+.v6-track-svg path { vector-effect: non-scaling-stroke; }

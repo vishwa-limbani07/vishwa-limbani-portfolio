@@ -13,6 +13,17 @@ export class About implements AfterViewInit, OnDestroy {
   profileImage = 'assets/images/profile.png';
   timelineProgress = 0;
   orbTop = 0;
+  activeExpIndex = 0;
+  carouselIndex = 0;
+
+  setActiveExp(i: number) { this.activeExpIndex = i; }
+  nextCarousel() {
+    this.carouselIndex = (this.carouselIndex + 1) % this.experiences.length;
+  }
+  prevCarousel() {
+    this.carouselIndex = (this.carouselIndex - 1 + this.experiences.length) % this.experiences.length;
+  }
+  goCarousel(i: number) { this.carouselIndex = i; }
   private lenis: Lenis | null = null;
   private rafId: number | null = null;
   private isBrowser: boolean;
@@ -27,7 +38,7 @@ export class About implements AfterViewInit, OnDestroy {
       location: 'Melbourne, Australia',
       type: 'Remote',
       points: [
-        { text: 'Owning the complete frontend lifecycle — from <strong>UI design to development to testing</strong> — as the sole frontend lead.' },
+        { text: 'Owning the complete frontend lifecycle, from <strong>UI design to development to testing</strong>, as the sole frontend lead.' },
         { text: 'Upgraded a legacy dashboard from <strong>Angular 6 to Angular 21</strong>, migrating to modern component architecture and resolving third-party library conflicts blocking the update.' },
         { text: 'Optimized application <strong>performance and code quality</strong> through refactoring, lazy loading, and adopting Angular best practices.' },
         { text: 'Collaborating closely with the <strong>product team</strong> to translate business requirements into fully functional features.' },
@@ -102,6 +113,18 @@ export class About implements AfterViewInit, OnDestroy {
 
     if (this.rafId) cancelAnimationFrame(this.rafId);
     this.lenis?.destroy();
+  }
+
+  scrollTo(section: string, event?: Event) {
+    if (event) event.preventDefault();
+    if (!this.isBrowser) return;
+    const target = document.getElementById(section);
+    if (!target) return;
+    if (this.lenis) {
+      this.lenis.scrollTo(target, { duration: 1.4 });
+    } else {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   private updateTimeline() {

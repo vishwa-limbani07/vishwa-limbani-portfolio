@@ -26,7 +26,7 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
       id: 1,
       title: 'Nexus',
       description:
-        'A full-featured project management system with Kanban boards, drag-and-drop task tracking, squad management, real-time search, and five interactive analytics charts — built to demonstrate modern frontend architecture and scalable UI patterns.',
+        'A full-featured project management system with Kanban boards, drag-and-drop task tracking, squad management, real-time search, and five interactive analytics charts, built to demonstrate modern frontend architecture and scalable UI patterns.',
       tech: ['React 18', 'Vite', 'TailwindCSS', 'Zustand', 'React Query', 'Recharts'],
       images: [
         '/assets/images/projects/nexus/nexus1.png',
@@ -77,7 +77,7 @@ export class Projects implements OnInit, AfterViewInit, OnDestroy {
       id: 4,
       title: 'Portfolio',
       description:
-        'This portfolio — a handcrafted developer showcase built with Angular 21, SSR, and Tailwind CSS. Features fluid clamp-based typography, scroll-triggered animations, a fully responsive layout, and smooth Lenis scrolling across all breakpoints.',
+        'This portfolio is a handcrafted developer showcase built with Angular 21, SSR, and Tailwind CSS. Features fluid clamp-based typography, scroll-triggered animations, a fully responsive layout, and smooth Lenis scrolling across all breakpoints.',
       tech: ['Angular 21', 'TailwindCSS', 'TypeScript', 'AOS', 'Lenis', 'SSR'],
       images: [
         '/assets/images/projects/portfolio/portfolio_1.png',
