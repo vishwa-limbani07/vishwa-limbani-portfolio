@@ -11,26 +11,37 @@
     </h2>
   </div>
 
-  <!-- Marquee Row 1 (left to right) -->
-  <div class="marquee-wrapper mb-6" data-aos="fade-up" data-aos-delay="200">
-    <div class="marquee-track animate-marquee">
-      <div
-        *ngFor="let skill of doubledSkills"
-        class="marquee-pill"
-      >
-        <span class="pill-text">{{ skill.name }}</span>
-      </div>
-    </div>
-  </div>
+  <!-- Dark full-bleed category grid -->
+  <div class="dk-wrap">
+    <div class="dk-grid">
+      <div class="dk-panel" *ngFor="let cat of skillCategories">
 
-  <!-- Marquee Row 2 (right to left) -->
-  <div class="marquee-wrapper" data-aos="fade-up" data-aos-delay="300">
-    <div class="marquee-track animate-marquee-reverse">
-      <div
-        *ngFor="let skill of doubledSkillsReversed"
-        class="marquee-pill marquee-pill--inverted"
-      >
-        <span class="pill-text">{{ skill.name }}</span>
+        <!-- Category header -->
+        <h3 class="dk-head-title">{{ cat.name }}</h3>
+
+        <!-- Skill list -->
+        <ul class="dk-list">
+          <li
+            class="dk-item"
+            *ngFor="let skill of cat.skills; let j = index"
+            [style.--chip-i]="j"
+            [style.--brand-color]="brandColor(skill.name)"
+          >
+            <!-- Icon: SVG mask so background-color controls the fill -->
+            <span class="dk-icon-wrap">
+              <span
+                *ngIf="skillIcon(skill.name); else letterTpl"
+                class="dk-icon"
+                [style.--mask-img]="iconMaskUrl(skill.name)"
+              ></span>
+              <ng-template #letterTpl>
+                <span class="dk-icon-letter">{{ iconFallback(skill.name) }}</span>
+              </ng-template>
+            </span>
+
+            <span class="dk-name">{{ skill.name }}</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

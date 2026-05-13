@@ -1,11 +1,12 @@
 :host {
   display: block;
+  width: 100%;
   padding-left: var(--spacing-x);
   padding-right: var(--spacing-x);
   overflow: hidden;
 }
 
-/* ---- Section Header ---- */
+/* ── Section Header ─────────────────────────────────────────── */
 .section-label {
   font-family: var(--font-family-mono);
   font-size: 10px;
@@ -21,99 +22,169 @@
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.035em;
-  text-transform: none;
   color: var(--text-dark);
 }
 
-/* ---- Marquee ---- */
-.marquee-wrapper {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+
+/* ════════════════════════════════════════════════════════════════
+   Dark Category Grid
+   ════════════════════════════════════════════════════════════════ */
+
+/* Full-bleed — extend by exactly the host's padding on each side */
+.dk-wrap {
+  position: relative;
+  width: calc(100% + var(--spacing-x) * 2);
+  margin-left:  calc(-1 * var(--spacing-x));
+  margin-right: calc(-1 * var(--spacing-x));
+  background: #0a0a0a;
+  border-top:    1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.marquee-track {
-  display: flex;
-  gap: 16px;
-  white-space: nowrap;
-  width: max-content;
+/* 6-col grid → row 1 = 2 panels (span 3), row 2 = 3 panels (span 2)        */
+/* 1px gap trick — grid background = line colour                            */
+.dk-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.animate-marquee {
-  animation: marquee 30s linear infinite;
+/* Row 1 — first 2 panels each span 3 of 6 columns */
+.dk-panel:nth-child(-n + 2) { grid-column: span 3; }
+
+/* Row 2 — last 3 panels each span 2 of 6 columns */
+.dk-panel:nth-child(n + 3)  { grid-column: span 2; }
+
+.dk-panel {
+  background: #0a0a0a;
+  padding: 52px 48px 60px;
+  transition: background 0.2s ease;
 }
 
-.animate-marquee-reverse {
-  animation: marquee-reverse 30s linear infinite;
+/* Outer-edge panels re-apply the page's horizontal margin so content lines up */
+.dk-panel:nth-child(1),       /* Frontend — top-left  */
+.dk-panel:nth-child(3) {      /* Backend  — bottom-left */
+  padding-left: var(--spacing-x);
 }
 
-/* ---- Pill Styling ---- */
-.marquee-pill {
-  flex-shrink: 0;
-  padding: 12px 20px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-light);
-  border-radius: 16px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
-  cursor: default;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+.dk-panel:nth-child(2),       /* Language — top-right    */
+.dk-panel:nth-child(5) {      /* Database — bottom-right */
+  padding-right: var(--spacing-x);
 }
 
-@media (min-width: 768px) {
-  .marquee-pill {
-    padding: 16px 32px;
+/* Mobile — stack everything into a single column */
+@media (max-width: 640px) {
+  .dk-grid { grid-template-columns: 1fr; }
+  .dk-panel:nth-child(n) {
+    grid-column: span 1;
+    padding-left:  var(--spacing-x);
+    padding-right: var(--spacing-x);
   }
 }
 
-.marquee-pill:hover {
-  border-color: var(--text-dark);
-  transform: translateY(-2px);
-}
-
-/* Inverted (black) pills for second row */
-.marquee-pill--inverted {
-  background: var(--text-dark);
-  border-color: var(--text-dark);
-}
-
-.marquee-pill--inverted .pill-text {
-  color: var(--text-white);
-}
-
-.marquee-pill--inverted:hover {
-  background: var(--text-primary);
-  border-color: var(--text-primary);
-}
-
-.pill-text {
+/* ── Category header ── */
+.dk-head-title {
   font-family: var(--font-family-dm);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
-  color: var(--text-dark);
-  letter-spacing: -0.02em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 32px;
 }
 
-@media (min-width: 768px) {
-  .pill-text {
-    font-size: 18px;
-  }
+/* ── Skill list ── */
+.dk-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-/* ---- Keyframes ---- */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+/* Default item state is VISIBLE — so nothing can ever leave items stuck invisible */
+.dk-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  cursor: default;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: calc(var(--chip-i, 0) * 60ms + 0.1s);
 }
 
-@keyframes marquee-reverse {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0);
-  }
+/* Pre-entrance state — only applies until the wrap gets `.dk-animated` */
+.dk-wrap:not(.dk-animated) .dk-item {
+  opacity: 0;
+  transform: translateX(-12px);
 }
+
+/* ── Icon ── */
+.dk-icon-wrap {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon rendered as an SVG mask so `background` controls the fill colour */
+.dk-icon {
+  width: 22px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.4);
+  mask-image: var(--mask-img);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-image: var(--mask-img);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  transition: background 0.25s ease;
+}
+
+/* On hover, fill switches to the skill's brand colour */
+.dk-item:hover .dk-icon {
+  background: var(--brand-color, #fff);
+}
+
+/* Letter fallback for RxJS / NgRx */
+.dk-icon-letter {
+  font-family: var(--font-family-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.3);
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  letter-spacing: 0;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.dk-item:hover .dk-icon-letter {
+  color: var(--brand-color, #fff);
+  border-color: var(--brand-color, #fff);
+}
+
+/* ── Skill name ── */
+.dk-name {
+  font-family: var(--font-family-mono);
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+
+.dk-item:hover .dk-name { color: rgba(255, 255, 255, 0.88); }
