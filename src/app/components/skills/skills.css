@@ -18,7 +18,7 @@
 
 .section-heading {
   font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif !important;
-  font-size: clamp(56px, 7vw, 110px);
+  font-size: clamp(40px, 9vw, 110px);
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.035em;
@@ -38,7 +38,7 @@
   margin-right: calc(-1 * var(--spacing-x));
   background: #0a0a0a;
   border-top:    1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 /* 6-col grid → row 1 = 2 panels (span 3), row 2 = 3 panels (span 2)        */
@@ -73,14 +73,37 @@
   padding-right: var(--spacing-x);
 }
 
+/* Tablet — collapse the 6-col grid into a balanced 2-col layout.
+   With 5 panels we get 2 + 2 + 1; the orphan panel spans the row so it
+   doesn't sit awkwardly at half width. */
+@media (max-width: 1023px) and (min-width: 641px) {
+  .dk-grid { grid-template-columns: repeat(2, 1fr); }
+  .dk-panel:nth-child(n) {
+    grid-column: span 1;
+    padding: 44px 36px 48px;
+  }
+  .dk-panel:nth-child(odd)  { padding-left:  var(--spacing-x); }
+  .dk-panel:nth-child(even) { padding-right: var(--spacing-x); }
+  .dk-panel:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    padding-left:  var(--spacing-x);
+    padding-right: var(--spacing-x);
+  }
+}
+
 /* Mobile — stack everything into a single column */
 @media (max-width: 640px) {
   .dk-grid { grid-template-columns: 1fr; }
   .dk-panel:nth-child(n) {
     grid-column: span 1;
-    padding-left:  var(--spacing-x);
-    padding-right: var(--spacing-x);
+    padding: 36px var(--spacing-x) 40px;
   }
+  .dk-head-title {
+    font-size: 12px;
+    margin-bottom: 24px;
+  }
+  .dk-name { font-size: 13px; }
+  .dk-item { padding: 8px 0; }
 }
 
 /* ── Category header ── */

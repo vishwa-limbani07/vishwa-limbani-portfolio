@@ -11,6 +11,11 @@ import { FormsModule } from '@angular/forms';
 const EMAILJS_SERVICE_ID  = 'service_wnhce05';
 const EMAILJS_TEMPLATE_ID = 'template_c2yib6i';
 const EMAILJS_PUBLIC_KEY  = 'cgHGqDumojSHBjyq1';
+
+// Path to the resume file inside src/assets (Angular serves it from /assets/...)
+// Update the extension if you upload a different file type (.pdf, .docx, etc.)
+const RESUME_PATH     = 'assets/resume/resume.pdf';
+const RESUME_FILENAME = 'Vishwa-Limbani-Resume.pdf';
 // ─────────────────────────────────────────────────────────────────────────────
 
 interface ContactForm {
@@ -32,7 +37,7 @@ export class Contact implements OnInit, AfterViewInit {
   email       = 'limbanivishwa@gmail.com';
   linkedinUrl = 'https://linkedin.com/in/vishwa-limbani';
   githubUrl   = 'https://github.com/vishwa-limbani07';
-  resumeUrl   = 'assets/docs/resume.pdf';
+  resumeUrl   = RESUME_PATH;
   currentYear = new Date().getFullYear();
 
   form: ContactForm = { name: '', email: '', message: '' };
@@ -40,6 +45,10 @@ export class Contact implements OnInit, AfterViewInit {
   sent     = false;
   sendError = false;
   copied   = false;
+
+  downloading   = false;
+  downloaded    = false;
+  downloadError = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -93,5 +102,39 @@ export class Contact implements OnInit, AfterViewInit {
       this.copied = true;
       setTimeout(() => (this.copied = false), 2000);
     });
+  }
+
+  async downloadResume(event: Event): Promise<void> {
+    event.preventDefault();
+    if (!this.isBrowser || this.downloading) return;
+
+    this.downloading   = true;
+    this.downloaded    = false;
+    this.downloadError = false;
+
+    try {
+      const response = await fetch(this.resumeUrl);
+      if (!response.ok) throw new Error(`Resume not found (${response.status})`);
+
+      const blob    = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = RESUME_FILENAME;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+
+      this.downloaded = true;
+      setTimeout(() => (this.downloaded = false), 2500);
+    } catch {
+      this.downloadError = true;
+      setTimeout(() => (this.downloadError = false), 3000);
+    } finally {
+      this.downloading = false;
+    }
   }
 }
