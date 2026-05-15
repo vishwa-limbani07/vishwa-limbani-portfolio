@@ -1,13 +1,22 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, NgZone, PLATFORM_ID, Inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+  OnDestroy,
+  NgZone,
+  PLATFORM_ID,
+  Inject,
+} from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import Lenis from 'lenis';
+import { SmoothScrollService } from '../../core/smooth-scroll.service';
 
 @Component({
   selector: 'app-about',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './about.html',
-  styleUrls: ['./about.css']
+  styleUrls: ['./about.css'],
 })
 export class About implements AfterViewInit, OnDestroy {
   profileImage = 'assets/images/profile.png';
@@ -16,17 +25,23 @@ export class About implements AfterViewInit, OnDestroy {
   activeExpIndex = 0;
   carouselIndex = 0;
 
-  setActiveExp(i: number) { this.activeExpIndex = i; }
+  setActiveExp(i: number) {
+    this.activeExpIndex = i;
+  }
   nextCarousel() {
     this.carouselIndex = (this.carouselIndex + 1) % this.experiences.length;
   }
   prevCarousel() {
-    this.carouselIndex = (this.carouselIndex - 1 + this.experiences.length) % this.experiences.length;
+    this.carouselIndex =
+      (this.carouselIndex - 1 + this.experiences.length) %
+      this.experiences.length;
   }
-  goCarousel(i: number) { this.carouselIndex = i; }
-  private lenis: Lenis | null = null;
-  private rafId: number | null = null;
-  private isBrowser: boolean;
+  goCarousel(i: number) {
+    this.carouselIndex = i;
+  }
+
+  private detachScroll: (() => void) | null = null;
+  private readonly isBrowser: boolean;
 
   @ViewChild('timelineTrack') timelineTrack!: ElementRef;
 
@@ -78,7 +93,8 @@ export class About implements AfterViewInit, OnDestroy {
 
   constructor(
     private ngZone: NgZone,
-    @Inject(PLATFORM_ID) private platformId: Object
+    private smoothScroll: SmoothScrollService,
+    @Inject(PLATFORM_ID) private platformId: Object,
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
@@ -86,45 +102,24 @@ export class About implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     if (!this.isBrowser) return;
 
+    // Subscribe to the global smooth-scroll loop instead of spinning up our
+    // own Lenis instance — multiple Lenis owners produce jitter and duplicate
+    // RAF loops.
     this.ngZone.runOutsideAngular(() => {
-      // Initialize Lenis smooth scroll
-      this.lenis = new Lenis({
-        duration: 1.2,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-      });
-
-      // On every Lenis scroll frame, update the timeline
-      this.lenis.on('scroll', () => {
-        this.updateTimeline();
-      });
-
-      // Start the animation loop
-      const raf = (time: number) => {
-        this.lenis?.raf(time);
-        this.rafId = requestAnimationFrame(raf);
-      };
-      this.rafId = requestAnimationFrame(raf);
+      this.detachScroll = this.smoothScroll.onScroll(() =>
+        this.updateTimeline(),
+      );
+      this.updateTimeline();
     });
   }
 
   ngOnDestroy() {
-    if (!this.isBrowser) return;
-
-    if (this.rafId) cancelAnimationFrame(this.rafId);
-    this.lenis?.destroy();
+    this.detachScroll?.();
   }
 
   scrollTo(section: string, event?: Event) {
     if (event) event.preventDefault();
-    if (!this.isBrowser) return;
-    const target = document.getElementById(section);
-    if (!target) return;
-    if (this.lenis) {
-      this.lenis.scrollTo(target, { duration: 1.4 });
-    } else {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    this.smoothScroll.scrollTo(section);
   }
 
   private updateTimeline() {
@@ -135,7 +130,10 @@ export class About implements AfterViewInit, OnDestroy {
     const trackHeight = rect.height;
     const viewportCenter = window.innerHeight / 2;
     const progressPx = viewportCenter - rect.top;
-    const progress = Math.min(100, Math.max(0, (progressPx / trackHeight) * 100));
+    const progress = Math.min(
+      100,
+      Math.max(0, (progressPx / trackHeight) * 100),
+    );
 
     this.ngZone.run(() => {
       this.timelineProgress = progress;

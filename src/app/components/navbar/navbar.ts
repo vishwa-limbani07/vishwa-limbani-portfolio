@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { SmoothScrollService } from '../../core/smooth-scroll.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,22 +14,24 @@ export class Navbar {
 
   sections = ['home', 'about', 'skills', 'projects', 'contact'];
 
-  scrollTo(section: string) {
-    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
-    this.isMenuOpen = false;
-  }
   isScrolled = false;
   lastScrollY = 0;
-   @HostListener('window:scroll', [])
+
+  constructor(private smoothScroll: SmoothScrollService) {}
+
+  scrollTo(section: string) {
+    this.smoothScroll.scrollTo(section);
+    this.isMenuOpen = false;
+  }
+
+  @HostListener('window:scroll', [])
   onScroll() {
     const currentScrollY = window.scrollY;
- 
-    // Trigger glass effect once scrolled past 60px
+
     this.isScrolled = currentScrollY > 60;
     this.lastScrollY = currentScrollY;
- 
-    // Active section tracking
-    this.sections.forEach(section => {
+
+    this.sections.forEach((section) => {
       const el = document.getElementById(section);
       if (el) {
         const rect = el.getBoundingClientRect();
