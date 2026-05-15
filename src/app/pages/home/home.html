@@ -4,19 +4,27 @@
   <app-hero></app-hero>
 </section>
 
-<section id="about" class="flex justify-center overflow-hidden">
+<section id="about" appReveal="up" class="flex justify-center overflow-hidden">
   <app-about></app-about>
 </section>
 
-<section id="skills" class="flex justify-center">
+<section id="skills" appReveal="up" class="flex justify-center">
   <app-skills></app-skills>
 </section>
 
-<section id="projects" class="flex justify-center">
+<section id="projects" appReveal="up" class="flex justify-center">
   <app-projects></app-projects>
 </section>
 
-<section id="contact" class="flex justify-center">
+<section id="contact" appReveal="up" class="flex justify-center">
+  <!-- ── CONTACT VARIANTS ─────────────────────────────────────────
+       Swap which one is active. Only ONE should be uncommented.
+       A · Bento card (current)         <app-contact>
+       B · Editorial minimal            <app-contact-editorial>
+       C · Split terminal               <app-contact-terminal>
+       D · Floating card cluster        <app-contact-cluster>
+  ────────────────────────────────────────────────────────────── -->
   <app-contact></app-contact>
 </section>
 
+<app-footer-minimal></app-footer-minimal>

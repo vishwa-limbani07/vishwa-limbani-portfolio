@@ -1,0 +1,20 @@
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, #0a0a0a 0%, #f97316 60%, #f97316 100%);
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  z-index: 200;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress {
+    display: none;
+  }
+}

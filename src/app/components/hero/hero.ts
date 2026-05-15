@@ -1,5 +1,6 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, NgZone, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { SmoothScrollService } from '../../core/smooth-scroll.service';
 
 @Component({
   selector: 'app-hero',
@@ -47,6 +48,7 @@ export class HeroComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private zone: NgZone,
+    private smoothScroll: SmoothScrollService,
   ) {}
 
   ngOnInit() {
@@ -136,18 +138,31 @@ export class HeroComponent implements OnInit, OnDestroy {
   }
 
   scrollTo(section: string) {
-    if (!isPlatformBrowser(this.platformId)) return;
-    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+    this.smoothScroll.scrollTo(section);
   }
 
-  downloadResume() {
+  async downloadResume(): Promise<void> {
     if (!isPlatformBrowser(this.platformId)) return;
-    const link = document.createElement('a');
-    link.href = 'resume.pdf';
-    link.download = 'Vishwa-Limbani-Resume.pdf';
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+
+    try {
+      const response = await fetch('assets/resume/resume.pdf');
+      if (!response.ok) throw new Error(`Resume not found (${response.status})`);
+
+      const blob    = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = 'Vishwa-Limbani-Resume.pdf';
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+    } catch (err) {
+      console.error('Resume download failed:', err);
+      window.open('assets/resume/resume.pdf', '_blank');
+    }
   }
 }

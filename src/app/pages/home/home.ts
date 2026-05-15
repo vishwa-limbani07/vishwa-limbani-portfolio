@@ -10,15 +10,21 @@ import { isPlatformBrowser } from '@angular/common';
 
 import { About } from '../../components/about/about';
 import { Contact } from '../../components/contact/contact';
+import { FooterMinimal } from '../../components/footer-minimal/footer-minimal';
 import { Navbar } from '../../components/navbar/navbar';
 import { Projects } from '../../components/projects/projects';
 import { Skills } from '../../components/skills/skills';
 import { HeroComponent } from '../../components/hero/hero';
+import { RevealDirective } from '../../core/reveal.directive';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Navbar, HeroComponent, About, Skills, Projects, Contact],
+  imports: [
+    Navbar, HeroComponent, About, Skills, Projects,
+    Contact,
+    FooterMinimal, RevealDirective
+  ],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

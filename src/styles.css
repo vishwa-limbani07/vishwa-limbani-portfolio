@@ -95,13 +95,28 @@
 .nav-link:hover {
   color: var(--text-accent);
 }
-html {
+/* Lenis owns scroll behavior — `scroll-behavior: smooth` would fight its RAF
+   loop and produce double-easing on programmatic jumps. Lenis tags <html>
+   with `.lenis` automatically; fall back to native smooth-scroll only when
+   Lenis is absent (SSR pre-hydration or reduced motion). */
+html:not(.lenis):not(.reduced-motion) {
   scroll-behavior: smooth;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+  overscroll-behavior: none;
+}
+
+html.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
 section {
   scroll-margin-top: 80px;
 }
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -109,6 +124,69 @@ body {
   font-weight: var(--font-regular);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ─── Reveal-on-scroll baseline ──────────────────────────────────────────
+   The RevealDirective tags elements with `.reveal` and a variant; on enter
+   it adds `.reveal-in`. All transitions are GPU-friendly (opacity + transform)
+   to keep frames cheap while Lenis is running. */
+.reveal {
+  opacity: 0;
+  will-change: opacity, transform;
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+}
+
+.reveal--up    { transform: translate3d(0, 28px, 0); }
+.reveal--fade  { transform: none; }
+.reveal--left  { transform: translate3d(-32px, 0, 0); }
+.reveal--right { transform: translate3d(32px, 0, 0); }
+.reveal--zoom  { transform: scale(0.96); }
+
+.reveal.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Once revealed, drop will-change so we don't pin a compositor layer forever. */
+.reveal.reveal-in {
+  will-change: auto;
+}
+
+/* Reduced motion — skip all reveal transforms, show content immediately. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--up,
+  .reveal--left,
+  .reveal--right,
+  .reveal--zoom {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Image / media — avoid layout jank during scroll */
+img, svg, video {
+  vertical-align: middle;
+}
+
+/* Smoother focus ring (keyboard-only) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 /* Editorial display title — used for non-uppercase headlines
