@@ -1,17 +1,13 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Inject,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  tech: string[];
-  images: string[];
-  color: string;
-  liveUrl: string;
-  githubUrl: string;
-  githubBackendUrl?: string;
-}
+import { PROJECTS, Project } from './projects.data';
 
 @Component({
   selector: 'app-projects',
@@ -20,185 +16,95 @@ interface Project {
   templateUrl: './projects.html',
   styleUrls: ['./projects.css'],
 })
-export class Projects implements OnInit, AfterViewInit, OnDestroy {
-  projects: Project[] = [
-    {
-      id: 1,
-      title: 'Nexus',
-      description:
-        'A full-featured project management system with Kanban boards, drag-and-drop task tracking, squad management, real-time search, and five interactive analytics charts, built to demonstrate modern frontend architecture and scalable UI patterns.',
-      tech: ['React 18', 'Vite', 'TailwindCSS', 'Zustand', 'React Query', 'Recharts'],
-      images: [
-        '/assets/images/projects/nexus/nexus1.png',
-        '/assets/images/projects/nexus/nexus2.png',
-        '/assets/images/projects/nexus/nexus3.png',
-        '/assets/images/projects/nexus/nexus4.png',
-        '/assets/images/projects/nexus/nexus5.png',
-      ],
-      color: '#f3f4f6',
-      liveUrl: 'https://projectnest-io.vercel.app/',
-      githubUrl: 'https://github.com/vishwa-limbani07/pms-frontend',
-      githubBackendUrl: 'https://github.com/vishwa-limbani07/pms-backend',
-    },
-    {
-      id: 2,
-      title: 'CollabBoard',
-      description:
-        'A real-time collaborative whiteboard where teams draw, sketch, and brainstorm together. Features live cursors, sticky notes, board persistence in MongoDB, undo/redo, zoom/pan, and one-click PNG export.',
-      tech: ['Angular 17', 'NestJS', 'MongoDB', 'Socket.io', 'Canvas API', 'JWT'],
-      images: [
-        '/assets/images/projects/collabboard/collabboard_1.png',
-        '/assets/images/projects/collabboard/collabboard_2.png',
-        '/assets/images/projects/collabboard/collabboard_3.png',
-        '/assets/images/projects/collabboard/collabboard_4.png',
-      ],
-      color: '#ffffff',
-      liveUrl: 'https://collabboard-chi.vercel.app/',
-      githubUrl: 'https://github.com/vishwa-limbani07/collabboard',
-    },
-    {
-      id: 3,
-      title: 'Vizora',
-      description:
-        'A self-service analytics dashboard that turns raw CSV/JSON data into interactive charts. Features a visual chart builder, server-side aggregation, AI-powered natural language queries via Google Gemini, and a real-time live data feed over SSE.',
-      tech: ['Angular 21', 'Node.js', 'Chart.js', 'Google Gemini AI', 'MongoDB', 'SSE'],
-      images: [
-        '/assets/images/projects/vizora/Vizora_web_1.png',
-        '/assets/images/projects/vizora/Vizora_web_2.png',
-        '/assets/images/projects/vizora/Vizora_web_3.png',
-        '/assets/images/projects/vizora/Vizora_web_4.png',
-        '/assets/images/projects/vizora/Vizora_mobile_1.png',
-      ],
-      color: '#f9fafb',
-      liveUrl: 'https://insighthub-cyan.vercel.app/',
-      githubUrl: 'https://github.com/vishwa-limbani07/insighthub',
-    },
-    {
-      id: 4,
-      title: 'Portfolio',
-      description:
-        'This portfolio is a handcrafted developer showcase built with Angular 21, SSR, and Tailwind CSS. Features fluid clamp-based typography, scroll-triggered animations, a fully responsive layout, and smooth Lenis scrolling across all breakpoints.',
-      tech: ['Angular 21', 'TailwindCSS', 'TypeScript', 'AOS', 'Lenis', 'SSR'],
-      images: [
-        '/assets/images/projects/portfolio/portfolio_1.png',
-        '/assets/images/projects/portfolio/portfolio_2.png',
-        '/assets/images/projects/portfolio/portfolio_3.png',
-        '/assets/images/projects/portfolio/portfolio_4.png',
-      ],
-      color: '#f3f4f6',
-      liveUrl: 'https://vishwa-limbani.vercel.app',
-      githubUrl: 'https://github.com/vishwa-limbani07/vishwa-limbani-portfolio',
-    },
-    {
-      id: 5,
-      title: 'NexFlow',
-      description:
-        'A high-fidelity SaaS marketing website for an AI-powered workflow automation platform. Features GSAP scroll-triggered animations, a pinned multi-step "How It Works" section, interactive particle canvas with mouse-repel physics, custom cursor, animated stat counters, magnetic buttons, and a fully responsive floating pill navbar.',
-      tech: ['HTML5', 'CSS3', 'JavaScript', 'GSAP 3', 'ScrollTrigger', 'Canvas API'],
-      images: [
-        '/assets/images/projects/nexflow/nexflow_1.png',
-        '/assets/images/projects/nexflow/nexflow_2.png',
-        '/assets/images/projects/nexflow/nexflow_3.png',
-        '/assets/images/projects/nexflow/nexflow_4.png',
-        '/assets/images/projects/nexflow/nexflow_5.png',
-      ],
-      color: '#f97316',
-      liveUrl: 'https://nexflow-psi.vercel.app/',
-      githubUrl: 'https://github.com/vishwa-limbani07/nexflow',
-    },
-  ];
+export class Projects implements OnInit, OnDestroy {
+  projects: Project[] = PROJECTS;
+  activeIndex = signal(0);
+  activeImageIndex = signal(0);
+  progress = signal(0);
+  isPaused = signal(false);
 
-  activeIndices: number[] = [];
-  progressPercents: number[] = [];
-
-  private intervals: ReturnType<typeof setInterval>[] = [];
-  private readonly DURATION = 3000;
-  private readonly TICK = 50;
   private isBrowser: boolean;
+  private intervalId: ReturnType<typeof setInterval> | null = null;
+  private readonly DURATION = 6000;
+  private readonly TICK = 50;
+  private elapsed = 0;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
-  async ngOnInit(): Promise<void> {
-    this.activeIndices = this.projects.map(() => 0);
-    this.progressPercents = this.projects.map(() => 0);
+  ngOnInit(): void {
     if (this.isBrowser) {
-      const AOS = (await import('aos')).default;
-      AOS.init({ duration: 800, once: true, easing: 'ease-in-out' });
-    }
-  }
-
-  async ngAfterViewInit(): Promise<void> {
-    if (this.isBrowser) {
-      const AOS = (await import('aos')).default;
-      setTimeout(() => AOS.refresh(), 100);
-      this.startAllAutoPlay();
+      this.startAutoplay();
     }
   }
 
   ngOnDestroy(): void {
-    this.intervals.forEach((id) => clearInterval(id));
+    this.clearAutoplay();
   }
 
-  setActiveImage(pi: number, ii: number): void {
-    this.activeIndices[pi] = ii;
-    this.pauseAutoPlay(pi);
-    this.resumeAutoPlay(pi);
+  get activeProject(): Project {
+    return this.projects[this.activeIndex()];
   }
 
-  onImageMouseEnter(pi: number): void {
-    this.pauseAutoPlay(pi);
+  selectProject(i: number): void {
+    if (this.activeIndex() === i) return;
+    this.activeIndex.set(i);
+    this.activeImageIndex.set(0);
+    this.resetTimer();
   }
 
-  onImageMouseMove(event: MouseEvent): void {
-    const wrap = event.currentTarget as HTMLElement;
-    const rect = wrap.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 14;
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 14;
-    const activeImg = wrap.querySelector<HTMLElement>('.project-img--active');
-    if (activeImg) {
-      activeImg.style.transform = `scale(1.07) translate(${x}px, ${y}px)`;
-    }
+  selectImage(i: number): void {
+    this.activeImageIndex.set(i);
+    this.resetTimer();
   }
 
-  onImageMouseLeave(event: MouseEvent, pi: number): void {
-    const wrap = event.currentTarget as HTMLElement;
-    wrap.querySelectorAll<HTMLElement>('.project-img').forEach((img) => {
-      img.style.transform = '';
-    });
-    this.resumeAutoPlay(pi);
+  pause(): void {
+    this.isPaused.set(true);
+    this.clearAutoplay();
   }
 
-  pauseAutoPlay(pi: number): void {
-    clearInterval(this.intervals[pi]);
-    this.progressPercents[pi] = 0;
+  resume(): void {
+    this.isPaused.set(false);
+    this.startAutoplay();
   }
 
-  resumeAutoPlay(pi: number): void {
-    const project = this.projects[pi];
-    if (project.images.length <= 1) return;
+  private startAutoplay(): void {
+    if (this.intervalId) return;
+    this.elapsed = 0;
+    this.progress.set(0);
 
-    let elapsed = 0;
-    this.progressPercents[pi] = 0;
+    this.intervalId = setInterval(() => {
+      this.elapsed += this.TICK;
+      this.progress.set((this.elapsed / this.DURATION) * 100);
 
-    this.intervals[pi] = setInterval(() => {
-      elapsed += this.TICK;
-      this.progressPercents[pi] = Math.min((elapsed / this.DURATION) * 100, 100);
-
-      if (elapsed >= this.DURATION) {
-        elapsed = 0;
-        this.progressPercents[pi] = 0;
-        this.activeIndices[pi] = (this.activeIndices[pi] + 1) % project.images.length;
+      if (this.elapsed >= this.DURATION) {
+        this.elapsed = 0;
+        this.progress.set(0);
+        const next = (this.activeIndex() + 1) % this.projects.length;
+        this.activeIndex.set(next);
+        this.activeImageIndex.set(0);
       }
     }, this.TICK);
   }
 
-  private startAllAutoPlay(): void {
-    this.projects.forEach((_, i) => this.resumeAutoPlay(i));
+  private clearAutoplay(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
+  }
+
+  private resetTimer(): void {
+    this.elapsed = 0;
+    this.progress.set(0);
+    this.clearAutoplay();
+    if (!this.isPaused()) {
+      this.startAutoplay();
+    }
   }
 
   getIndex(i: number): string {
-    return i < 9 ? '0' + (i + 1) : (i + 1).toString();
+    return i < 9 ? '0' + (i + 1) : i + 1 + '';
   }
 }

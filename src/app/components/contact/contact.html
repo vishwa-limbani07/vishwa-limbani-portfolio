@@ -1,8 +1,12 @@
 <!-- Contact Section -->
-<section class="relative z-10 w-full py-12">
+<section class="relative z-10 w-full py-12 contact-section">
+
+  <!-- Decorative ambient orbs -->
+  <div class="contact-orb contact-orb--one" aria-hidden="true"></div>
+  <div class="contact-orb contact-orb--two" aria-hidden="true"></div>
 
   <!-- Section Header -->
-  <div class="mb-12 md:mb-16">
+  <div class="mb-12 md:mb-16 relative z-10">
     <div class="flex items-center gap-4 mb-6" data-aos="fade-right">
       <div class="h-[1px] w-12 bg-[#c4c0b9]"></div>
       <span class="section-label">Connect</span>
@@ -12,73 +16,109 @@
     </h2>
   </div>
 
-  <!-- Contact Grid -->
-  <div class="contact-grid">
+  <!-- Contact Bento Grid -->
+  <div class="contact-grid relative z-10">
 
-    <!-- LEFT: Form -->
-    <div class="contact-form-wrap" data-aos="fade-up" data-aos-delay="150">
-      <p class="contact-intro">
-        Have a project in mind or just want to say hello?
-        Drop me a message and I'll get back to you within 24 hours.
-      </p>
+    <!-- LEFT: Form Card -->
+    <div class="form-card" data-aos="fade-up" data-aos-delay="150">
+      <div class="form-card-header">
+        <div class="form-card-eyebrow">
+          <span class="form-card-eyebrow-dot"></span>
+          <span>Send a message</span>
+        </div>
+        <p class="form-card-title">
+          Have a project in mind or just want to say hi?
+          Drop me a note and I'll reply within 24 hours.
+        </p>
+      </div>
 
       <form class="contact-form" (ngSubmit)="sendMessage()" #contactForm="ngForm" novalidate>
 
         <!-- Name + Email row -->
         <div class="form-row">
           <div class="form-field">
-            <label class="form-label" for="name">Name</label>
             <input
               id="name"
               name="name"
               type="text"
               class="form-input"
-              placeholder="John Doe"
+              placeholder=" "
+              autocomplete="name"
               [(ngModel)]="form.name"
               required
             />
+            <label class="form-label" for="name">Your Name</label>
           </div>
           <div class="form-field">
-            <label class="form-label" for="email">Email</label>
             <input
               id="email"
               name="email"
               type="email"
               class="form-input"
-              placeholder="john@example.com"
+              placeholder=" "
+              autocomplete="email"
               [(ngModel)]="form.email"
               required
             />
+            <label class="form-label" for="email">Email Address</label>
           </div>
         </div>
 
         <!-- Message -->
-        <div class="form-field">
-          <label class="form-label" for="message">Message</label>
+        <div class="form-field form-field--textarea">
           <textarea
             id="message"
             name="message"
             class="form-input form-textarea"
-            placeholder="Tell me about your project..."
+            placeholder=" "
+            maxlength="500"
             [(ngModel)]="form.message"
             required
-            rows="6"
+            rows="5"
           ></textarea>
+          <label class="form-label" for="message">Tell me about your project</label>
+          <span class="form-counter">{{ form.message.length }} / 500</span>
         </div>
 
-        <!-- Submit -->
-        <button
-          type="submit"
-          class="form-submit"
-          [class.form-submit--sending]="sending"
-          [disabled]="sending || !form.name || !form.email || !form.message"
-        >
-          <span *ngIf="!sending && !sent">Send Message →</span>
-          <span *ngIf="sending" class="flex items-center gap-2">
-            <span class="form-spinner"></span> Sending...
-          </span>
-          <span *ngIf="sent && !sending">Message sent ✓</span>
-        </button>
+        <!-- Action Row -->
+        <div class="form-action-row">
+          <button
+            type="submit"
+            class="form-submit"
+            [class.form-submit--sending]="sending"
+            [class.form-submit--sent]="sent && !sending"
+            [disabled]="sending || !form.name || !form.email || !form.message"
+          >
+            <span class="form-submit-bg" aria-hidden="true"></span>
+            <span *ngIf="!sending && !sent" class="form-submit-content">
+              <span>Send Message</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M13 5l7 7-7 7"/>
+              </svg>
+            </span>
+            <span *ngIf="sending" class="form-submit-content">
+              <span class="form-spinner"></span>
+              <span>Sending…</span>
+            </span>
+            <span *ngIf="sent && !sending" class="form-submit-content">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span>Message Sent</span>
+            </span>
+          </button>
+
+          <p class="form-meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            Your info stays private. No spam, ever.
+          </p>
+        </div>
 
         <!-- Feedback messages -->
         <p *ngIf="sent" class="form-feedback form-feedback--success">
@@ -92,79 +132,177 @@
       </form>
     </div>
 
-    <!-- RIGHT: Info strip -->
+    <!-- RIGHT: Info column -->
     <div class="contact-info" data-aos="fade-up" data-aos-delay="250">
 
-      <!-- Availability -->
-      <div class="info-availability">
-        <span class="info-avail-dot"></span>
-        <span class="info-avail-text">Available for new projects</span>
+      <!-- Profile mini card -->
+      <div class="profile-card">
+        <div class="profile-card-glow" aria-hidden="true"></div>
+        <div class="profile-card-top">
+          <div class="profile-avatar">
+            <span>VL</span>
+          </div>
+          <div class="profile-availability">
+            <span class="profile-avail-dot"></span>
+            <span>Available</span>
+          </div>
+        </div>
+        <h3 class="profile-name">Vishwa Limbani</h3>
+        <p class="profile-role">Full-Stack Developer · Building digital experiences that blend logic with aesthetics.</p>
+        <div class="profile-stats">
+          <div class="profile-stat">
+            <span class="profile-stat-label">Response</span>
+            <span class="profile-stat-value">~ 24h</span>
+          </div>
+          <div class="profile-stat-divider"></div>
+          <div class="profile-stat">
+            <span class="profile-stat-label">Location</span>
+            <span class="profile-stat-value">India</span>
+          </div>
+          <div class="profile-stat-divider"></div>
+          <div class="profile-stat">
+            <span class="profile-stat-label">Status</span>
+            <span class="profile-stat-value profile-stat-value--accent">Open</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Email -->
-      <button class="info-card info-card--clickable" (click)="copyEmail()" title="Click to copy">
+      <!-- Email Copy Card -->
+      <button class="info-card info-card--email" (click)="copyEmail()" title="Click to copy">
         <div class="info-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
             <rect width="20" height="16" x="2" y="4" rx="2"/>
             <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
           </svg>
         </div>
-        <div>
+        <div class="info-card-body">
           <div class="info-card-label">Email</div>
-          <div class="info-card-value">{{ copied ? 'Copied!' : email }}</div>
+          <div class="info-card-value">{{ email }}</div>
         </div>
-        <div class="info-card-arrow">{{ copied ? '✓' : '⎘' }}</div>
+        <div class="info-card-action" [class.info-card-action--success]="copied">
+          <span *ngIf="!copied" class="info-card-action-text">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+            </svg>
+            Copy
+          </span>
+          <span *ngIf="copied" class="info-card-action-text">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Copied
+          </span>
+        </div>
       </button>
 
-      <!-- LinkedIn -->
-      <a [href]="linkedinUrl" target="_blank" rel="noopener noreferrer" class="info-card info-card--clickable">
-        <div class="info-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-            <rect width="4" height="12" x="2" y="9"/>
-            <circle cx="4" cy="4" r="2"/>
-          </svg>
-        </div>
-        <div>
-          <div class="info-card-label">LinkedIn</div>
-          <div class="info-card-value">vishwa-limbani</div>
-        </div>
-        <div class="info-card-arrow">↗</div>
-      </a>
+      <!-- Socials Row (LinkedIn + GitHub) -->
+      <div class="socials-row">
+        <a [href]="linkedinUrl" target="_blank" rel="noopener noreferrer" class="social-card">
+          <div class="social-card-top">
+            <div class="info-card-icon info-card-icon--sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect width="4" height="12" x="2" y="9"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+            </div>
+            <span class="social-arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7M7 7h10v10"/>
+              </svg>
+            </span>
+          </div>
+          <div class="social-card-label">LinkedIn</div>
+          <div class="social-card-value">vishwa-limbani</div>
+        </a>
 
-      <!-- GitHub -->
-      <a [href]="githubUrl" target="_blank" rel="noopener noreferrer" class="info-card info-card--clickable">
-        <div class="info-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
-            <path d="M9 18c-4.51 2-5-2-7-2"/>
-          </svg>
-        </div>
-        <div>
-          <div class="info-card-label">GitHub</div>
-          <div class="info-card-value">vishwa-limbani07</div>
-        </div>
-        <div class="info-card-arrow">↗</div>
-      </a>
+        <a [href]="githubUrl" target="_blank" rel="noopener noreferrer" class="social-card">
+          <div class="social-card-top">
+            <div class="info-card-icon info-card-icon--sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                <path d="M9 18c-4.51 2-5-2-7-2"/>
+              </svg>
+            </div>
+            <span class="social-arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7M7 7h10v10"/>
+              </svg>
+            </span>
+          </div>
+          <div class="social-card-label">GitHub</div>
+          <div class="social-card-value">vishwa-limbani07</div>
+        </a>
+      </div>
 
-      <!-- Download CV -->
-      <a [href]="resumeUrl" download class="info-card info-card--dark">
-        <div class="info-card-icon info-card-icon--light">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" x2="12" y1="15" y2="3"/>
+      <!-- Resume Hero CTA -->
+      <a
+        [href]="resumeUrl"
+        (click)="downloadResume($event)"
+        class="resume-card"
+        [class.resume-card--downloading]="downloading"
+        [class.resume-card--downloaded]="downloaded"
+        [class.resume-card--error]="downloadError"
+      >
+        <div class="resume-card-bg" aria-hidden="true"></div>
+        <div class="resume-card-grid" aria-hidden="true"></div>
+        <div class="resume-card-content">
+          <div class="resume-card-icon">
+            <ng-container *ngIf="!downloading && !downloaded && !downloadError">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" x2="12" y1="15" y2="3"/>
+              </svg>
+            </ng-container>
+            <ng-container *ngIf="downloading">
+              <span class="resume-spinner" aria-hidden="true"></span>
+            </ng-container>
+            <ng-container *ngIf="downloaded">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </ng-container>
+            <ng-container *ngIf="downloadError">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </ng-container>
+          </div>
+          <div class="resume-card-text">
+            <div class="resume-card-label">
+              <span *ngIf="!downloading && !downloaded && !downloadError">Want the full story?</span>
+              <span *ngIf="downloading">Hang tight…</span>
+              <span *ngIf="downloaded">All yours</span>
+              <span *ngIf="downloadError">Something went wrong</span>
+            </div>
+            <div class="resume-card-title">
+              <span *ngIf="!downloading && !downloaded && !downloadError">Download Resume</span>
+              <span *ngIf="downloading">Preparing file…</span>
+              <span *ngIf="downloaded">Downloaded ✓</span>
+              <span *ngIf="downloadError">Email me instead</span>
+            </div>
+          </div>
+        </div>
+        <div class="resume-card-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v14M5 12l7 7 7-7"/>
           </svg>
         </div>
-        <div>
-          <div class="info-card-label info-card-label--light">Resume</div>
-          <div class="info-card-value info-card-value--light">Download PDF</div>
-        </div>
-        <div class="info-card-arrow info-card-arrow--light">↓</div>
       </a>
 
     </div>
